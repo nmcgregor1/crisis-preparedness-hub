@@ -1,9 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const ManagedService = () => {
-  return (
-    <div>
+  return <div>
       {/* Hero Section */}
       <section className="bg-secondary py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -15,7 +13,7 @@ const ManagedService = () => {
             provides 24/7 crisis response capabilities tailored for small businesses.
           </p>
           <Button asChild size="lg" variant="accent">
-            <Link to="/contact">Learn More About Our Service</Link>
+            <Link to="/contact">Learn More About This Service</Link>
           </Button>
         </div>
       </section>
@@ -41,8 +39,6 @@ const ManagedService = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default ManagedService;
