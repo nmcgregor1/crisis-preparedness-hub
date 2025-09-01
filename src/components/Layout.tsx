@@ -63,6 +63,20 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       </header>
 
+      {/* Hero Background Section */}
+      <section 
+        className="relative h-96 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url('/lovable-uploads/3593295a-a77f-4453-9f02-3c7451e405fa.png')` }}
+      >
+        <div className="absolute inset-0 bg-primary/60"></div>
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">Be Prepared...Respond with Purpose</h1>
+            <p className="text-xl md:text-2xl">Crisis Management for Small Business</p>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
       <main className="flex-1">
         {children}
