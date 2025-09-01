@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import logo from '@/assets/crisistance-logo.png';
+const logo = '/lovable-uploads/c7c09069-d57a-4209-a10c-1174209dc535.png';
 
 interface LayoutProps {
   children: React.ReactNode;
