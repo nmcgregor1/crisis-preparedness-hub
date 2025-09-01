@@ -17,7 +17,6 @@ const Layout = ({ children }: LayoutProps) => {
     { name: 'Managed Service', href: '/managed-service' },
     { name: 'Resource Library', href: '/resource-library' },
     { name: 'Incident Monitoring', href: '/incident-monitoring' },
-    { name: 'Partners', href: '/partners' },
     { name: 'Legal', href: '/legal' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -27,6 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Header */}
       <header className="bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Top row: Logo and CTA */}
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center space-x-3">
               <img 
@@ -37,7 +37,14 @@ const Layout = ({ children }: LayoutProps) => {
               <span className="text-xl font-bold text-primary">Crisistance</span>
             </Link>
             
-            <nav className="hidden md:flex space-x-8">
+            <Button asChild variant="default">
+              <Link to="/contact">Get Started</Link>
+            </Button>
+          </div>
+          
+          {/* Bottom row: Navigation */}
+          <div className="pb-4">
+            <nav className="flex justify-center md:justify-start space-x-8">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -52,10 +59,6 @@ const Layout = ({ children }: LayoutProps) => {
                 </Link>
               ))}
             </nav>
-            
-            <Button asChild variant="default">
-              <Link to="/contact">Get Started</Link>
-            </Button>
           </div>
         </div>
       </header>
@@ -96,7 +99,6 @@ const Layout = ({ children }: LayoutProps) => {
               <h3 className="font-semibold text-primary mb-4">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link to="/about" className="hover:text-primary">About</Link></li>
-                <li><Link to="/partners" className="hover:text-primary">Partners</Link></li>
                 <li><Link to="/contact" className="hover:text-primary">Contact</Link></li>
               </ul>
             </div>

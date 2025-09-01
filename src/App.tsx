@@ -11,7 +11,7 @@ import Legal from "./pages/Legal";
 import ManagedService from "./pages/ManagedService";
 import ResourceLibrary from "./pages/ResourceLibrary";
 import IncidentMonitoring from "./pages/IncidentMonitoring";
-import Partners from "./pages/Partners";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,7 +31,7 @@ const App = () => (
             <Route path="/managed-service" element={<ManagedService />} />
             <Route path="/resource-library" element={<ResourceLibrary />} />
             <Route path="/incident-monitoring" element={<IncidentMonitoring />} />
-            <Route path="/partners" element={<Partners />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
