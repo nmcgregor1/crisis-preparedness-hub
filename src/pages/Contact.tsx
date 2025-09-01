@@ -4,10 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, Clock } from 'lucide-react';
-
 const Contact = () => {
-  return (
-    <div>
+  return <div>
       {/* Hero Section */}
       <section className="bg-secondary py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -63,19 +61,10 @@ const Contact = () => {
                   
                   <div>
                     <Label htmlFor="message">Tell us about your business and crisis management needs</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Describe your business, current challenges, and what type of crisis management support you're looking for..."
-                      className="min-h-[120px]"
-                    />
+                    <Textarea id="message" placeholder="Describe your business, current challenges, and what type of crisis management support you're looking for..." className="min-h-[120px]" />
                   </div>
                   
-          <Button 
-            type="submit" 
-            size="lg" 
-            variant="accent"
-            className="w-full"
-          >
+          <Button type="submit" size="lg" variant="accent" className="w-full">
             Contact us to get started
           </Button>
                 </form>
@@ -93,10 +82,7 @@ const Contact = () => {
                   <CardDescription className="mb-2">
                     For general inquiries and support:
                   </CardDescription>
-                  <a 
-                    href="mailto:support@crisistance.com" 
-                    className="text-primary hover:underline font-medium"
-                  >
+                  <a href="mailto:support@crisistance.com" className="text-primary hover:underline font-medium">
                     support@crisistance.com
                   </a>
                 </CardContent>
@@ -111,12 +97,7 @@ const Contact = () => {
                   <CardDescription className="mb-2">
                     24/7 crisis response for existing clients:
                   </CardDescription>
-                  <a 
-                    href="tel:1-800-CRISIS-1" 
-                    className="text-primary hover:underline font-medium text-lg"
-                  >
-                    1-800-CRISIS-1
-                  </a>
+                  <a href="tel:1-800-CRISIS-1" className="text-primary hover:underline font-medium text-lg">1-647-600-5210</a>
                 </CardContent>
               </Card>
 
@@ -154,8 +135,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
