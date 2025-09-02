@@ -28,9 +28,9 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top row: Logo and CTA */}
           <div className="flex justify-between items-center py-4">
-            <Link to="/" className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-2">
               <img 
-                src={logo} 
+                src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
                 alt="Crisistance - Crisis Management for Small Business" 
                 className="h-16 w-auto"
               />
@@ -87,9 +87,9 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <Link to="/" className="flex items-center space-x-3">
+              <Link to="/" className="flex items-center space-x-2">
                 <img 
-                  src={logo} 
+                  src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
                   alt="Crisistance Logo" 
                   className="h-12 w-auto"
                 />
