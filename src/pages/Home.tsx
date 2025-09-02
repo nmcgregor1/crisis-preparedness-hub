@@ -2,8 +2,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Shield, Users, AlertTriangle, CheckCircle } from 'lucide-react';
+
 const Home = () => {
-  return <div>
+  return (
+    <div>
       {/* Hero Section */}
       <section className="bg-secondary py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -77,19 +79,27 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <h3 className="font-semibold text-primary mb-2">Small Business Focus</h3>
-              <p className="text-sm text-muted-foreground">Tailored solutions for small business constraints and resources</p>
+              <p className="text-sm text-muted-foreground">
+                Tailored solutions for small business constraints and resources.
+              </p>
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-primary mb-2">Proven Methods</h3>
-              <p className="text-sm text-muted-foreground">Evidence-based crisis management frameworks that work</p>
+              <p className="text-sm text-muted-foreground">
+                Evidence-based crisis management frameworks that work.
+              </p>
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-primary mb-2">Rapid Response</h3>
-              <p className="text-sm text-muted-foreground">Quick deployment when crisis strikes your business</p>
+              <p className="text-sm text-muted-foreground">
+                Quick deployment when crisis strikes your business.
+              </p>
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-primary mb-2">Affordable Protection</h3>
-              <p className="text-sm text-muted-foreground">Enterprise-level crisis management at small business prices</p>
+              <p className="text-sm text-muted-foreground">
+                Enterprise-level crisis management at small business prices.
+              </p>
             </div>
           </div>
         </div>
@@ -162,11 +172,17 @@ const Home = () => {
           <p className="text-lg text-primary-foreground/90 mb-8">
             Don't wait for crisis to strike. Get prepared today with Crisistance.
           </p>
-          <Button asChild size="lg" variant="accent">
+          <Button 
+            asChild 
+            size="lg" 
+            variant="accent"
+          >
             <Link to="/contact">Contact us to get started</Link>
           </Button>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default Home;
