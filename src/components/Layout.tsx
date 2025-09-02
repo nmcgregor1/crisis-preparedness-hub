@@ -15,7 +15,6 @@ const Layout = ({ children }: LayoutProps) => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Managed Service', href: '/managed-service' },
-    { name: 'Resource Library', href: '/resource-library' },
     { name: 'Incident Monitoring', href: '/incident-monitoring' },
     { name: 'Legal', href: '/legal' },
     { name: 'Contact', href: '/contact' },
@@ -26,9 +25,9 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Header */}
       <header className="bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top row: Logo and CTA */}
+          {/* Header row: Logo, Navigation, and CTA */}
           <div className="flex justify-between items-center py-4">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-1">
               <img 
                 src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
                 alt="Crisistance - Crisis Management for Small Business" 
@@ -37,14 +36,30 @@ const Layout = ({ children }: LayoutProps) => {
               <span className="text-xl font-bold text-primary">Crisistance</span>
             </Link>
             
+            <nav className="hidden md:flex space-x-8">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(item.href) 
+                      ? 'text-primary border-b-2 border-primary' 
+                      : 'text-muted-foreground'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+            
             <Button asChild variant="default">
               <Link to="/contact">Get Started</Link>
             </Button>
           </div>
           
-          {/* Bottom row: Navigation */}
-          <div className="pb-4">
-            <nav className="flex justify-center md:justify-start space-x-8">
+          {/* Mobile navigation */}
+          <div className="md:hidden pb-4">
+            <nav className="flex justify-center space-x-4 flex-wrap">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -87,7 +102,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <Link to="/" className="flex items-center space-x-2">
+              <Link to="/" className="flex items-center space-x-1">
                 <img 
                   src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
                   alt="Crisistance Logo" 
@@ -105,7 +120,6 @@ const Layout = ({ children }: LayoutProps) => {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link to="/managed-service" className="hover:text-primary">Managed Service</Link></li>
                 <li><Link to="/incident-monitoring" className="hover:text-primary">Incident Monitoring</Link></li>
-                <li><Link to="/resource-library" className="hover:text-primary">Resource Library</Link></li>
               </ul>
             </div>
             
