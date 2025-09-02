@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
               <img 
                 src={logo} 
                 alt="Crisistance - Crisis Management for Small Business" 
-                className="h-10 w-auto"
+                className="h-16 w-auto"
               />
               <span className="text-xl font-bold text-primary">Crisistance</span>
             </Link>
@@ -91,7 +91,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <img 
                   src={logo} 
                   alt="Crisistance Logo" 
-                  className="h-8 w-auto"
+                  className="h-12 w-auto"
                 />
                 <span className="text-lg font-bold text-primary">Crisistance</span>
               </Link>
