@@ -31,7 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
               <img 
                 src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
                 alt="Crisistance - Crisis Management for Small Business" 
-                className="h-16 w-auto"
+                className="h-20 w-auto"
               />
               <span className="text-xl font-bold text-primary -ml-6">Crisistance</span>
             </Link>
