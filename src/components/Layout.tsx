@@ -27,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header row: Logo, Navigation, and CTA */}
           <div className="flex justify-between items-center py-4">
-            <Link to="/" className="flex items-center space-x-1">
+            <Link to="/" className="flex items-center">
               <img 
                 src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
                 alt="Crisistance - Crisis Management for Small Business" 
