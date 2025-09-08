@@ -17,7 +17,6 @@ const Layout = ({ children }: LayoutProps) => {
     { name: 'Managed Service', href: '/managed-service' },
     { name: 'Incident Monitoring', href: '/incident-monitoring' },
     { name: 'Resources', href: '#' },
-    { name: 'Legal', href: '/legal' },
     { name: 'Contact', href: '/contact' },
   ];
 
