@@ -2,24 +2,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Shield, Users, AlertTriangle, CheckCircle } from 'lucide-react';
-
 const Home = () => {
-  return (
-    <div>
+  return <div>
       {/* Hero Section */}
-      <section className="bg-secondary py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-primary mb-6">
-            Be Prepared...Respond with Purpose
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Crisis Management for Small Business.
-          </p>
-          <Button asChild size="lg" variant="accent">
-            <Link to="/contact">Contact us to get started</Link>
-          </Button>
-        </div>
-      </section>
+      
 
       {/* Service Cards */}
       <section className="py-16">
@@ -172,17 +158,11 @@ const Home = () => {
           <p className="text-lg text-primary-foreground/90 mb-8">
             Don't wait for crisis to strike. Get prepared today with Crisistance.
           </p>
-          <Button 
-            asChild 
-            size="lg" 
-            variant="accent"
-          >
+          <Button asChild size="lg" variant="accent">
             <Link to="/contact">Contact us to get started</Link>
           </Button>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
