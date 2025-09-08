@@ -33,7 +33,7 @@ const Layout = ({ children }: LayoutProps) => {
                 alt="Crisistance - Crisis Management for Small Business" 
                 className="h-20 w-auto"
               />
-              <span className="text-xl font-bold text-primary -ml-7">Crisistance</span>
+              <span className="text-xl font-bold text-primary -ml-2">Crisistance</span>
             </Link>
             
             <nav className="hidden md:flex space-x-8">
