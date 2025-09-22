@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
     { name: 'About', href: '/about' },
     { name: 'Managed Service', href: '/managed-service' },
     { name: 'Incident Monitoring', href: '/incident-monitoring' },
-    { name: 'Resources', href: '#' },
+    { name: 'Resources', href: '/resource-library' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -38,29 +38,17 @@ const Layout = ({ children }: LayoutProps) => {
             
             <nav className="hidden md:flex space-x-8">
               {navigation.map((item) => (
-                item.name === 'Resources' ? (
-                  <a
-                    key={item.name}
-                    href="https://common-cold-ec2.notion.site/Crisistance-9187ef30790943e1bb7a78e931c5b526?source=copy_link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground"
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`text-sm font-medium transition-colors hover:text-primary ${
-                      isActive(item.href) 
-                        ? 'text-primary border-b-2 border-primary' 
-                        : 'text-muted-foreground'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(item.href) 
+                      ? 'text-primary border-b-2 border-primary' 
+                      : 'text-muted-foreground'
+                  }`}
+                >
+                  {item.name}
+                </Link>
               ))}
             </nav>
             
@@ -73,29 +61,17 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="md:hidden pb-4">
             <nav className="flex justify-center space-x-4 flex-wrap">
               {navigation.map((item) => (
-                item.name === 'Resources' ? (
-                  <a
-                    key={item.name}
-                    href="https://common-cold-ec2.notion.site/Crisistance-9187ef30790943e1bb7a78e931c5b526?source=copy_link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground"
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`text-sm font-medium transition-colors hover:text-primary ${
-                      isActive(item.href) 
-                        ? 'text-primary border-b-2 border-primary' 
-                        : 'text-muted-foreground'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(item.href) 
+                      ? 'text-primary border-b-2 border-primary' 
+                      : 'text-muted-foreground'
+                  }`}
+                >
+                  {item.name}
+                </Link>
               ))}
             </nav>
           </div>
