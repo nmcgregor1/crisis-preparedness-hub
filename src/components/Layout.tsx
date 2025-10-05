@@ -63,8 +63,8 @@ const Layout = ({
 
       {/* Hero Background Section */}
       <section className="relative h-64 bg-cover bg-no-repeat" style={{
-      backgroundImage: `url('/lovable-uploads/3593295a-a77f-4453-9f02-3c7451e405fa.png')`,
-      backgroundPosition: 'center -200px'
+      backgroundImage: `url('/lovable-uploads/waves-crashing-hero.png')`,
+      backgroundPosition: 'center center'
     }}>
         <div className="absolute inset-0 bg-primary/30"></div>
         <div className="relative z-10 h-full flex items-center justify-center">
