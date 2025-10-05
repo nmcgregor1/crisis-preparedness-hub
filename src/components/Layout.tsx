@@ -62,7 +62,7 @@ const Layout = ({
       </header>
 
       {/* Hero Background Section */}
-      <section className="relative h-64 bg-cover bg-no-repeat" style={{
+      <section className="relative h-80 md:h-96 bg-cover bg-no-repeat" style={{
       backgroundImage: `url('/lovable-uploads/waves-crashing-hero.png')`,
       backgroundPosition: 'center center'
     }}>
