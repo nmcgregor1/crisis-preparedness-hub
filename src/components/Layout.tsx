@@ -62,11 +62,11 @@ const Layout = ({
       </header>
 
       {/* Hero Background Section */}
-      <section className="relative h-96 bg-cover bg-no-repeat" style={{
+      <section className="relative h-64 bg-cover bg-no-repeat" style={{
       backgroundImage: `url('/lovable-uploads/3593295a-a77f-4453-9f02-3c7451e405fa.png')`,
       backgroundPosition: 'center -200px'
     }}>
-        <div className="absolute inset-0 bg-primary/60"></div>
+        <div className="absolute inset-0 bg-primary/30"></div>
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-4xl font-bold mb-4 md:text-5xl">Be Prepared...Respond with Purpose</h1>
