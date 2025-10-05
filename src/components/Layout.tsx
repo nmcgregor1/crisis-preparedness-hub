@@ -1,55 +1,48 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 const logo = '/lovable-uploads/c7c09069-d57a-4209-a10c-1174209dc535.png';
-
 interface LayoutProps {
   children: React.ReactNode;
 }
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({
+  children
+}: LayoutProps) => {
   const location = useLocation();
-  
   const isActive = (path: string) => location.pathname === path;
-  
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Managed Service', href: '/managed-service' },
-    { name: 'Incident Monitoring', href: '/incident-monitoring' },
-    { name: 'Resources', href: '/resource-library' },
-    { name: 'Contact', href: '/contact' },
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  const navigation = [{
+    name: 'Home',
+    href: '/'
+  }, {
+    name: 'About',
+    href: '/about'
+  }, {
+    name: 'Managed Service',
+    href: '/managed-service'
+  }, {
+    name: 'Incident Monitoring',
+    href: '/incident-monitoring'
+  }, {
+    name: 'Resources',
+    href: '/resource-library'
+  }, {
+    name: 'Contact',
+    href: '/contact'
+  }];
+  return <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header row: Logo, Navigation, and CTA */}
           <div className="flex justify-between items-center py-3">
             <Link to="/" className="flex items-center">
-              <img 
-                src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
-                alt="Crisistance - Crisis Management for Small Business" 
-                className="h-20 w-auto"
-              />
+              <img src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" alt="Crisistance - Crisis Management for Small Business" className="h-20 w-auto" />
               <span className="text-xl font-bold text-primary -ml-2">Crisistance</span>
             </Link>
             
             <nav className="hidden md:flex space-x-8">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    isActive(item.href) 
-                      ? 'text-primary border-b-2 border-primary' 
-                      : 'text-muted-foreground'
-                  }`}
-                >
+              {navigation.map(item => <Link key={item.name} to={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.href) ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground'}`}>
                   {item.name}
-                </Link>
-              ))}
+                </Link>)}
             </nav>
             
             <Button asChild variant="default">
@@ -60,36 +53,23 @@ const Layout = ({ children }: LayoutProps) => {
           {/* Mobile navigation */}
           <div className="md:hidden pb-4">
             <nav className="flex justify-center space-x-4 flex-wrap">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    isActive(item.href) 
-                      ? 'text-primary border-b-2 border-primary' 
-                      : 'text-muted-foreground'
-                  }`}
-                >
+              {navigation.map(item => <Link key={item.name} to={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.href) ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground'}`}>
                   {item.name}
-                </Link>
-              ))}
+                </Link>)}
             </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Background Section */}
-      <section 
-        className="relative h-96 bg-cover bg-no-repeat"
-        style={{ 
-          backgroundImage: `url('/lovable-uploads/3593295a-a77f-4453-9f02-3c7451e405fa.png')`,
-          backgroundPosition: 'center -100px'
-        }}
-      >
+      <section className="relative h-96 bg-cover bg-no-repeat" style={{
+      backgroundImage: `url('/lovable-uploads/3593295a-a77f-4453-9f02-3c7451e405fa.png')`,
+      backgroundPosition: 'center -100px'
+    }}>
         <div className="absolute inset-0 bg-primary/60"></div>
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 -mt-36">Be Prepared...Respond with Purpose</h1>
+            <h1 className="text-4xl font-bold mb-4 -mt-36 text-justify md:text-5xl">Be Prepared...Respond with Purpose</h1>
             <p className="text-xl md:text-2xl">Crisis Management for Small Business</p>
           </div>
         </div>
@@ -106,11 +86,7 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <Link to="/" className="flex items-center space-x-1">
-                <img 
-                  src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" 
-                  alt="Crisistance Logo" 
-                  className="h-12 w-auto"
-                />
+                <img src="/lovable-uploads/7d859f52-bc78-47ff-a223-56d823390198.png" alt="Crisistance Logo" className="h-12 w-auto" />
                 <span className="text-lg font-bold text-primary">Crisistance</span>
               </Link>
               <p className="text-sm text-muted-foreground">
@@ -147,8 +123,6 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Layout;
