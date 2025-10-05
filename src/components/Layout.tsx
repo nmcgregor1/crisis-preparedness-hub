@@ -69,7 +69,7 @@ const Layout = ({
         <div className="absolute inset-0 bg-primary/60"></div>
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-4xl font-bold mb-4 -mt-36 text-justify md:text-5xl">Be Prepared...Respond with Purpose</h1>
+            <h1 className="text-4xl font-bold mb-4 md:text-5xl">Be Prepared...Respond with Purpose</h1>
             <p className="text-xl md:text-2xl">Crisis Management for Small Business</p>
           </div>
         </div>
