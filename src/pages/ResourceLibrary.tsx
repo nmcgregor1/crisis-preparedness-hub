@@ -202,9 +202,6 @@ const ResourceLibrary = () => {
           <p className="text-lg font-semibold text-primary mb-4">
             Want these as downloads?
           </p>
-          <p className="text-muted-foreground mb-6">
-            I can convert any item into printable PDF checklists, staff posters, or a single bundled PDF. I can also produce short social-media tiles sized for LinkedIn and X.
-          </p>
           <p className="text-sm text-muted-foreground">
             Last updated: September 12, 2025
           </p>
