@@ -13,6 +13,7 @@ import ResourceLibrary from "./pages/ResourceLibrary";
 import IncidentMonitoring from "./pages/IncidentMonitoring";
 
 import NotFound from "./pages/NotFound";
+import News from "./pages/News";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/managed-service" element={<ManagedService />} />
             <Route path="/resource-library" element={<ResourceLibrary />} />
             <Route path="/incident-monitoring" element={<IncidentMonitoring />} />
+            <Route path="/news" element={<News />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

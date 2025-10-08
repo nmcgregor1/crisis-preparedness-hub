@@ -25,6 +25,9 @@ const Layout = ({
     name: 'Resources',
     href: '/resource-library'
   }, {
+    name: 'News',
+    href: '/news'
+  }, {
     name: 'Contact',
     href: '/contact'
   }];
