@@ -14,6 +14,7 @@ import IncidentMonitoring from "./pages/IncidentMonitoring";
 
 import NotFound from "./pages/NotFound";
 import News from "./pages/News";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/resource-library" element={<ResourceLibrary />} />
             <Route path="/incident-monitoring" element={<IncidentMonitoring />} />
             <Route path="/news" element={<News />} />
+            <Route path="/admin" element={<Admin />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

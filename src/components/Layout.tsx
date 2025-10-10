@@ -28,6 +28,9 @@ const Layout = ({
     name: 'News',
     href: '/news'
   }, {
+    name: 'Admin',
+    href: '/admin'
+  }, {
     name: 'Contact',
     href: '/contact'
   }];

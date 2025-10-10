@@ -1,34 +1,50 @@
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
+interface NewsArticle {
+  id: string;
+  date: string;
+  category: string;
+  category_color: string;
+  headline: string;
+  content: string;
+  link: string | null;
+  published: boolean;
+}
 
 const News = () => {
-  const newsItems = [
-    {
-      date: "October 8, 2025",
-      category: "Cyber Security",
-      categoryColor: "bg-blue-500",
-      headline: "New Ransomware Variant Targets Small Businesses",
-      content: "Security researchers have identified a new ransomware strain specifically targeting small and medium-sized businesses. The malware exploits common vulnerabilities in outdated software. Business owners are urged to update all systems immediately and implement robust backup procedures.",
-      link: null
-    },
-    {
-      date: "October 5, 2025",
-      category: "Natural Disaster",
-      categoryColor: "bg-red-500",
-      headline: "Hurricane Season Preparedness Checklist Released",
-      content: "FEMA has released an updated hurricane preparedness guide for businesses in coastal regions. Key recommendations include establishing evacuation procedures, securing important documents in waterproof containers, and maintaining emergency supply kits. The Atlantic hurricane season is expected to be more active than average this year.",
-      link: "https://www.ready.gov/hurricanes"
-    },
-    {
-      date: "September 28, 2025",
-      category: "Business Continuity",
-      categoryColor: "bg-green-500",
-      headline: "Study Shows 60% of Small Businesses Lack Crisis Plans",
-      content: "A recent survey reveals that only 40% of small businesses have documented crisis management plans. Companies without plans are three times more likely to close permanently after a major disruption. Industry experts recommend starting with basic emergency contact lists and gradually building comprehensive response procedures.",
-      link: null
+  const { toast } = useToast();
+  const [newsItems, setNewsItems] = useState<NewsArticle[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPublishedArticles();
+  }, []);
+
+  const fetchPublishedArticles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('news_articles')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setNewsItems(data || []);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: "Failed to load news articles",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
     }
-  ];
+  };
 
   return (
     <div className="min-h-screen">
@@ -46,13 +62,22 @@ const News = () => {
       {/* News Feed */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="space-y-6">
-            {newsItems.map((item, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+          {isLoading ? (
+            <div className="flex justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin" />
+            </div>
+          ) : newsItems.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No news articles available yet. Check back soon!</p>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {newsItems.map((item) => (
+              <Card key={item.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-sm text-muted-foreground">{item.date}</span>
-                    <Badge className={`${item.categoryColor} text-white border-0`}>
+                    <Badge className={`${item.category_color} text-white border-0`}>
                       {item.category}
                     </Badge>
                   </div>
@@ -75,16 +100,9 @@ const News = () => {
                   )}
                 </CardContent>
               </Card>
-            ))}
-          </div>
-
-          {/* Footer Note */}
-          <div className="mt-12 p-6 bg-muted/50 rounded-lg">
-            <p className="text-sm text-muted-foreground">
-              <strong>Add new items:</strong> To add news articles, simply add new objects to the newsItems array 
-              at the top of this component. Place the newest items first to maintain reverse-chronological order.
-            </p>
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>
