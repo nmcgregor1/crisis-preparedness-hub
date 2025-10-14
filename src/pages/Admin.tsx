@@ -7,7 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Trash2, Edit, Eye, EyeOff, Sparkles } from "lucide-react";
+import { Loader2, Trash2, Edit, Eye, EyeOff, Sparkles, Search, ExternalLink } from "lucide-react";
+
+interface DiscoveredArticle {
+  headline: string;
+  summary: string;
+  source: string;
+  suggestedCategory: string;
+}
 
 interface NewsArticle {
   id: string;
@@ -26,6 +33,12 @@ const Admin = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isDiscovering, setIsDiscovering] = useState(false);
+  const [discoveredArticles, setDiscoveredArticles] = useState<DiscoveredArticle[]>([]);
+  
+  // Discovery filters
+  const [discoveryCategory, setDiscoveryCategory] = useState("All");
+  const [discoveryTimeframe, setDiscoveryTimeframe] = useState("7");
   
   // Form state
   const [topic, setTopic] = useState("");
@@ -232,10 +245,167 @@ const Admin = () => {
     });
   };
 
+  const discoverNews = async () => {
+    setIsDiscovering(true);
+    setDiscoveredArticles([]);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('discover-news-articles', {
+        body: { 
+          category: discoveryCategory === "All" ? null : discoveryCategory,
+          timeframe: discoveryTimeframe
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.articles && data.articles.length > 0) {
+        setDiscoveredArticles(data.articles);
+        toast({
+          title: "Success",
+          description: `Found ${data.articles.length} news articles!`
+        });
+      } else {
+        toast({
+          title: "No Results",
+          description: "No articles found. Try adjusting your filters.",
+          variant: "destructive"
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to discover articles",
+        variant: "destructive"
+      });
+    } finally {
+      setIsDiscovering(false);
+    }
+  };
+
+  const useDiscoveredArticle = (article: DiscoveredArticle) => {
+    setTopic(article.headline);
+    setFormData({
+      ...formData,
+      headline: article.headline,
+      content: article.summary,
+      category: article.suggestedCategory,
+      link: article.source
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    toast({
+      title: "Article Loaded",
+      description: "Review and edit the article, then publish when ready."
+    });
+  };
+
   return (
     <div className="min-h-screen py-16">
       <div className="container mx-auto px-4 max-w-6xl">
         <h1 className="text-4xl font-bold mb-8">News Admin</h1>
+
+        {/* Discovery Section */}
+        <Card className="mb-8 border-primary/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Search className="h-5 w-5" />
+              Discover News Articles
+            </CardTitle>
+            <p className="text-sm text-muted-foreground mt-2">
+              Search real-time news sources powered by Perplexity AI
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="text-sm font-medium mb-2 block">Category</label>
+                <Select value={discoveryCategory} onValueChange={setDiscoveryCategory}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All Categories</SelectItem>
+                    <SelectItem value="Cyber Security">Cyber Security</SelectItem>
+                    <SelectItem value="Natural Disaster">Natural Disaster</SelectItem>
+                    <SelectItem value="Business Continuity">Business Continuity</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium mb-2 block">Timeframe</label>
+                <Select value={discoveryTimeframe} onValueChange={setDiscoveryTimeframe}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="7">Last 7 days</SelectItem>
+                    <SelectItem value="14">Last 14 days</SelectItem>
+                    <SelectItem value="30">Last 30 days</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex items-end">
+                <Button onClick={discoverNews} disabled={isDiscovering} className="w-full">
+                  {isDiscovering ? (
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  ) : (
+                    <Search className="h-4 w-4 mr-2" />
+                  )}
+                  Search Articles
+                </Button>
+              </div>
+            </div>
+
+            {/* Discovered Articles */}
+            {discoveredArticles.length > 0 && (
+              <div className="space-y-3 mt-6">
+                <h3 className="font-semibold text-sm text-muted-foreground">
+                  Found {discoveredArticles.length} articles
+                </h3>
+                <div className="grid gap-3">
+                  {discoveredArticles.map((article, index) => (
+                    <Card key={index} className="bg-muted/30">
+                      <CardContent className="pt-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <Badge className={`${categoryColors[article.suggestedCategory]} text-white border-0 text-xs`}>
+                                {article.suggestedCategory}
+                              </Badge>
+                            </div>
+                            <h4 className="font-semibold leading-tight">{article.headline}</h4>
+                            <p className="text-sm text-muted-foreground">{article.summary}</p>
+                            {article.source && (
+                              <a 
+                                href={article.source} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="text-xs text-primary hover:underline flex items-center gap-1"
+                              >
+                                <ExternalLink className="h-3 w-3" />
+                                View Source
+                              </a>
+                            )}
+                          </div>
+                          <Button 
+                            size="sm" 
+                            onClick={() => useDiscoveredArticle(article)}
+                            className="shrink-0"
+                          >
+                            <Sparkles className="h-3 w-3 mr-1" />
+                            Use Article
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Generator Section */}
         <Card className="mb-8">
