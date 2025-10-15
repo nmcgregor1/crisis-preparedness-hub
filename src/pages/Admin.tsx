@@ -7,7 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Trash2, Edit, Eye, EyeOff, Sparkles, Search, ExternalLink } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Loader2, Trash2, Edit, Eye, EyeOff, Sparkles, Search, ExternalLink, LogOut } from "lucide-react";
 
 interface DiscoveredArticle {
   headline: string;
@@ -30,6 +31,7 @@ interface NewsArticle {
 
 const Admin = () => {
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -302,9 +304,25 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen py-16">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <h1 className="text-4xl font-bold mb-8">News Admin</h1>
+    <div className="min-h-screen bg-background">
+      {/* Header with User Info and Logout */}
+      <div className="bg-primary/5 border-b border-border">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+              <p className="text-sm text-muted-foreground mt-1">Logged in as: {user?.email}</p>
+            </div>
+            <Button variant="outline" onClick={signOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <h2 className="text-2xl font-bold mb-8">News Management</h2>
 
         {/* Discovery Section */}
         <Card className="mb-8 border-primary/20">

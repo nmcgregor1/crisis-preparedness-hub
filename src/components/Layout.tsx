@@ -1,12 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, Outlet } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-const logo = '/lovable-uploads/c7c09069-d57a-4209-a10c-1174209dc535.png';
-interface LayoutProps {
-  children: React.ReactNode;
-}
-const Layout = ({
-  children
-}: LayoutProps) => {
+
+const Layout = () => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   const navigation = [{
@@ -83,7 +78,7 @@ const Layout = ({
 
       {/* Main Content */}
       <main className="flex-1">
-        {children}
+        <Outlet />
       </main>
 
       {/* Footer */}
