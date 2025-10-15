@@ -1,7 +1,7 @@
 project_id = "dtgldtmgrblnwvfaevwd"
 
 [functions.generate-news-article]
-verify_jwt = false
+verify_jwt = true
 
 [functions.discover-news-articles]
-verify_jwt = false
+verify_jwt = true

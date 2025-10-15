@@ -16,7 +16,7 @@ import News from "./pages/News";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import { AuthProvider } from "./contexts/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const AppContent = () => {
@@ -36,9 +36,9 @@ const AppContent = () => {
           <Route path="/incident-monitoring" element={<IncidentMonitoring />} />
           <Route path="/news" element={<News />} />
           <Route path="/admin" element={
-            <ProtectedRoute>
+            <AdminRoute>
               <Admin />
-            </ProtectedRoute>
+            </AdminRoute>
           } />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
