@@ -127,7 +127,7 @@ const handler = async (req: Request): Promise<Response> => {
       // Admin notification email
       await smtpClient.send({
         from: `Crisistance - New Inquiry <${Deno.env.get("GMAIL_USER")}>`,
-        to: "support@crisistance.com",
+        to: "nick@crisistance.com",
         subject: `New Contact Form Submission - ${sanitizedData.company}`,
         content: "auto",
         html: `
