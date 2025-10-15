@@ -1,10 +1,13 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Layout = () => {
   const location = useLocation();
+  const { user } = useAuth();
   const isActive = (path: string) => location.pathname === path;
-  const navigation = [{
+  
+  const allNavigation = [{
     name: 'Home',
     href: '/'
   }, {
@@ -29,6 +32,12 @@ const Layout = () => {
     name: 'Contact',
     href: '/contact'
   }];
+  
+  // Filter out Admin link if user is not authenticated
+  const navigation = allNavigation.filter(item => 
+    item.name !== 'Admin' || user !== null
+  );
+  
   return <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="bg-background border-b border-border">
