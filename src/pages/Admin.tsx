@@ -39,6 +39,7 @@ const Admin = () => {
   // Discovery filters
   const [discoveryCategory, setDiscoveryCategory] = useState("All");
   const [discoveryTimeframe, setDiscoveryTimeframe] = useState("7");
+  const [customKeywords, setCustomKeywords] = useState("");
   
   // Form state
   const [topic, setTopic] = useState("");
@@ -253,7 +254,8 @@ const Admin = () => {
       const { data, error } = await supabase.functions.invoke('discover-news-articles', {
         body: { 
           category: discoveryCategory === "All" ? null : discoveryCategory,
-          timeframe: discoveryTimeframe
+          timeframe: discoveryTimeframe,
+          customKeywords: customKeywords.trim()
         }
       });
 
@@ -316,45 +318,60 @@ const Admin = () => {
             </p>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-2 block">Category</label>
-                <Select value={discoveryCategory} onValueChange={setDiscoveryCategory}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="All">All Categories</SelectItem>
-                    <SelectItem value="Cyber Security">Cyber Security</SelectItem>
-                    <SelectItem value="Natural Disaster">Natural Disaster</SelectItem>
-                    <SelectItem value="Business Continuity">Business Continuity</SelectItem>
-                  </SelectContent>
-                </Select>
+                <label className="text-sm font-medium mb-2 block">Custom Search Keywords (Optional)</label>
+                <Input
+                  placeholder="e.g., ransomware, supply chain, small business"
+                  value={customKeywords}
+                  onChange={(e) => setCustomKeywords(e.target.value)}
+                  disabled={isDiscovering}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Add specific keywords to refine your search. These will be combined with your selected category.
+                </p>
               </div>
               
-              <div>
-                <label className="text-sm font-medium mb-2 block">Timeframe</label>
-                <Select value={discoveryTimeframe} onValueChange={setDiscoveryTimeframe}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="7">Last 7 days</SelectItem>
-                    <SelectItem value="14">Last 14 days</SelectItem>
-                    <SelectItem value="30">Last 30 days</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Category</label>
+                  <Select value={discoveryCategory} onValueChange={setDiscoveryCategory}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="All">All Categories</SelectItem>
+                      <SelectItem value="Cyber Security">Cyber Security</SelectItem>
+                      <SelectItem value="Natural Disaster">Natural Disaster</SelectItem>
+                      <SelectItem value="Business Continuity">Business Continuity</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Timeframe</label>
+                  <Select value={discoveryTimeframe} onValueChange={setDiscoveryTimeframe}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="7">Last 7 days</SelectItem>
+                      <SelectItem value="14">Last 14 days</SelectItem>
+                      <SelectItem value="30">Last 30 days</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              <div className="flex items-end">
-                <Button onClick={discoverNews} disabled={isDiscovering} className="w-full">
-                  {isDiscovering ? (
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  ) : (
-                    <Search className="h-4 w-4 mr-2" />
-                  )}
-                  Search Articles
-                </Button>
+                <div className="flex items-end">
+                  <Button onClick={discoverNews} disabled={isDiscovering} className="w-full">
+                    {isDiscovering ? (
+                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    ) : (
+                      <Search className="h-4 w-4 mr-2" />
+                    )}
+                    Search Articles
+                  </Button>
+                </div>
               </div>
             </div>
 

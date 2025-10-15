@@ -19,25 +19,44 @@ serve(async (req) => {
   }
 
   try {
-    const { category, timeframe = '7' } = await req.json();
+    const { category, timeframe = '7', customKeywords } = await req.json();
     const perplexityApiKey = Deno.env.get('PERPLEXITY_API_KEY');
 
     if (!perplexityApiKey) {
       throw new Error('PERPLEXITY_API_KEY is not configured');
     }
 
-    // Build search query based on category
-    let searchQuery = 'recent crisis management news';
-    if (category && category !== 'All') {
-      if (category === 'Cyber Security') {
-        searchQuery = 'recent cybersecurity threats incidents small business 2025';
-      } else if (category === 'Natural Disaster') {
-        searchQuery = 'recent natural disasters business impact crisis 2025';
-      } else if (category === 'Business Continuity') {
-        searchQuery = 'business continuity crisis management news 2025';
+    // Build search query based on category and custom keywords
+    let searchQuery = '';
+    
+    if (customKeywords && customKeywords.trim()) {
+      // User has custom keywords
+      if (category && category !== 'All') {
+        // Combine category-specific query with custom keywords
+        if (category === 'Cyber Security') {
+          searchQuery = `recent cybersecurity threats incidents ${customKeywords} 2025`;
+        } else if (category === 'Natural Disaster') {
+          searchQuery = `recent natural disasters ${customKeywords} crisis 2025`;
+        } else if (category === 'Business Continuity') {
+          searchQuery = `business continuity ${customKeywords} crisis management 2025`;
+        }
+      } else {
+        // Use custom keywords with general crisis management context
+        searchQuery = `crisis management ${customKeywords} news 2025`;
       }
     } else {
-      searchQuery = 'crisis management cybersecurity natural disaster business continuity news 2025';
+      // Use existing category-based logic (no custom keywords)
+      if (category && category !== 'All') {
+        if (category === 'Cyber Security') {
+          searchQuery = 'recent cybersecurity threats incidents small business 2025';
+        } else if (category === 'Natural Disaster') {
+          searchQuery = 'recent natural disasters business impact crisis 2025';
+        } else if (category === 'Business Continuity') {
+          searchQuery = 'business continuity crisis management news 2025';
+        }
+      } else {
+        searchQuery = 'crisis management cybersecurity natural disaster business continuity news 2025';
+      }
     }
 
     console.log('Searching Perplexity with query:', searchQuery);
