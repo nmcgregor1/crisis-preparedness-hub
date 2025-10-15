@@ -1,8 +1,18 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
-import { Resend } from "npm:resend@2.0.0";
+import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const smtpClient = new SMTPClient({
+  connection: {
+    hostname: "smtp.gmail.com",
+    port: 465,
+    tls: true,
+    auth: {
+      username: Deno.env.get("GMAIL_USER")!,
+      password: Deno.env.get("GMAIL_APP_PASSWORD")!,
+    },
+  },
+});
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -115,10 +125,11 @@ const handler = async (req: Request): Promise<Response> => {
     // Send emails
     try {
       // Admin notification email
-      await resend.emails.send({
-        from: "Crisistance - New Inquiry <onboarding@resend.dev>",
-        to: ["support@crisistance.com"],
+      await smtpClient.send({
+        from: `Crisistance - New Inquiry <${Deno.env.get("GMAIL_USER")}>`,
+        to: "support@crisistance.com",
         subject: `New Contact Form Submission - ${sanitizedData.company}`,
+        content: "auto",
         html: `
           <h2>New Contact Form Submission</h2>
           <p><strong>Submission ID:</strong> ${submission.id}</p>
@@ -135,10 +146,11 @@ const handler = async (req: Request): Promise<Response> => {
       });
 
       // User confirmation email
-      await resend.emails.send({
-        from: "Crisistance Team <onboarding@resend.dev>",
-        to: [sanitizedData.email],
+      await smtpClient.send({
+        from: `Crisistance Team <${Deno.env.get("GMAIL_USER")}>`,
+        to: sanitizedData.email,
         subject: "Thank you for contacting Crisistance",
+        content: "auto",
         html: `
           <h2>Thank you for contacting us, ${sanitizedData.first_name}!</h2>
           <p>We have received your message and will get back to you within 24 hours.</p>
