@@ -116,7 +116,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       // Admin notification email
       await resend.emails.send({
-        from: "Crisistance Contact Form <onboarding@resend.dev>",
+        from: "Crisistance - New Inquiry <onboarding@resend.dev>",
         to: ["support@crisistance.com"],
         subject: `New Contact Form Submission - ${sanitizedData.company}`,
         html: `
@@ -136,7 +136,7 @@ const handler = async (req: Request): Promise<Response> => {
 
       // User confirmation email
       await resend.emails.send({
-        from: "Crisistance <onboarding@resend.dev>",
+        from: "Crisistance Team <onboarding@resend.dev>",
         to: [sanitizedData.email],
         subject: "Thank you for contacting Crisistance",
         html: `
