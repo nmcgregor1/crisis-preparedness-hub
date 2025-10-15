@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_submissions: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          ip_address: string | null
+          last_name: string
+          message: string
+          phone: string | null
+          status: string
+          user_agent: string | null
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          ip_address?: string | null
+          last_name: string
+          message: string
+          phone?: string | null
+          status?: string
+          user_agent?: string | null
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          ip_address?: string | null
+          last_name?: string
+          message?: string
+          phone?: string | null
+          status?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       news_articles: {
         Row: {
           category: string

@@ -3,8 +3,87 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, Clock } from 'lucide-react';
+import { Mail, Phone, Clock, Loader2, CheckCircle2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
+
+const contactFormSchema = z.object({
+  firstName: z.string()
+    .min(2, 'First name must be at least 2 characters')
+    .max(100, 'First name must be less than 100 characters')
+    .regex(/^[a-zA-Z\s\-]+$/, 'First name can only contain letters, spaces, and hyphens'),
+  lastName: z.string()
+    .min(2, 'Last name must be at least 2 characters')
+    .max(100, 'Last name must be less than 100 characters')
+    .regex(/^[a-zA-Z\s\-]+$/, 'Last name can only contain letters, spaces, and hyphens'),
+  email: z.string()
+    .email('Invalid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  company: z.string()
+    .min(2, 'Company name must be at least 2 characters')
+    .max(200, 'Company name must be less than 200 characters'),
+  phone: z.string()
+    .regex(/^[\d\s\-\+\(\)]*$/, 'Invalid phone number format')
+    .min(10, 'Phone number must be at least 10 digits')
+    .max(20, 'Phone number must be less than 20 characters')
+    .optional()
+    .or(z.literal('')),
+  message: z.string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(2000, 'Message must be less than 2000 characters'),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    setIsSuccess(false);
+
+    try {
+      const { data: result, error } = await supabase.functions.invoke('submit-contact-form', {
+        body: data,
+      });
+
+      if (error) throw error;
+
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      setIsSuccess(true);
+      reset();
+      toast({
+        title: "Success!",
+        description: result.message || "Thank you! We'll contact you within 24 hours.",
+      });
+    } catch (error: any) {
+      console.error('Contact form error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit form. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return <div>
       {/* Hero Section */}
       <section className="bg-secondary py-16">
@@ -32,41 +111,117 @@ const Contact = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <form className="space-y-4">
+                {isSuccess && (
+                  <div className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-950 text-green-800 dark:text-green-200 rounded-lg">
+                    <CheckCircle2 className="h-5 w-5" />
+                    <p className="text-sm font-medium">Thank you! We'll contact you within 24 hours.</p>
+                  </div>
+                )}
+                
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="John" />
+                      <Label htmlFor="firstName">First Name *</Label>
+                      <Input
+                        id="firstName"
+                        placeholder="John"
+                        {...register('firstName')}
+                        disabled={isSubmitting}
+                        className={errors.firstName ? 'border-destructive' : ''}
+                      />
+                      {errors.firstName && (
+                        <p className="text-sm text-destructive mt-1">{errors.firstName.message}</p>
+                      )}
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Smith" />
+                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Input
+                        id="lastName"
+                        placeholder="Smith"
+                        {...register('lastName')}
+                        disabled={isSubmitting}
+                        className={errors.lastName ? 'border-destructive' : ''}
+                      />
+                      {errors.lastName && (
+                        <p className="text-sm text-destructive mt-1">{errors.lastName.message}</p>
+                      )}
                     </div>
                   </div>
                   
                   <div>
-                    <Label htmlFor="email">Business Email</Label>
-                    <Input id="email" type="email" placeholder="john@company.com" />
+                    <Label htmlFor="email">Business Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@company.com"
+                      {...register('email')}
+                      disabled={isSubmitting}
+                      className={errors.email ? 'border-destructive' : ''}
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+                    )}
                   </div>
                   
                   <div>
-                    <Label htmlFor="company">Company Name</Label>
-                    <Input id="company" placeholder="Your Company" />
+                    <Label htmlFor="company">Company Name *</Label>
+                    <Input
+                      id="company"
+                      placeholder="Your Company"
+                      {...register('company')}
+                      disabled={isSubmitting}
+                      className={errors.company ? 'border-destructive' : ''}
+                    />
+                    {errors.company && (
+                      <p className="text-sm text-destructive mt-1">{errors.company.message}</p>
+                    )}
                   </div>
                   
                   <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" placeholder="(555) 123-4567" />
+                    <Label htmlFor="phone">Phone Number (Optional)</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="(555) 123-4567"
+                      {...register('phone')}
+                      disabled={isSubmitting}
+                      className={errors.phone ? 'border-destructive' : ''}
+                    />
+                    {errors.phone && (
+                      <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
+                    )}
                   </div>
                   
                   <div>
-                    <Label htmlFor="message">Tell us about your business and crisis management needs</Label>
-                    <Textarea id="message" placeholder="Describe your business, current challenges, and what type of crisis management support you're looking for..." className="min-h-[120px]" />
+                    <Label htmlFor="message">Tell us about your business and crisis management needs *</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="Describe your business, current challenges, and what type of crisis management support you're looking for..."
+                      className={`min-h-[120px] ${errors.message ? 'border-destructive' : ''}`}
+                      {...register('message')}
+                      disabled={isSubmitting}
+                    />
+                    {errors.message && (
+                      <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
+                    )}
                   </div>
                   
-          <Button type="submit" size="lg" variant="accent" className="w-full">
-            Contact us to get started
-          </Button>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    variant="accent"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      'Contact us to get started'
+                    )}
+                  </Button>
                 </form>
               </CardContent>
             </Card>
