@@ -126,7 +126,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       // Admin notification email
       await smtpClient.send({
-        from: "Crisistance - New Inquiry <noreply@crisistance.com>",
+        from: `Crisistance - New Inquiry <${Deno.env.get("GMAIL_USER")}>`,
         to: "support@crisistance.com",
         subject: `New Contact Form Submission - ${sanitizedData.company}`,
         content: "auto",
@@ -147,7 +147,7 @@ const handler = async (req: Request): Promise<Response> => {
 
       // User confirmation email
       await smtpClient.send({
-        from: "Crisistance Team <noreply@crisistance.com>",
+        from: `Crisistance Team <${Deno.env.get("GMAIL_USER")}>`,
         to: sanitizedData.email,
         subject: "Thank you for contacting Crisistance",
         content: "auto",
