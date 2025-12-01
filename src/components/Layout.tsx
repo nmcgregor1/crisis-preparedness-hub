@@ -56,7 +56,7 @@ const Layout = () => {
             </nav>
             
             <Button asChild variant="default">
-              <Link to="/contact">Get Started</Link>
+              <Link to="/get-started">Get Started</Link>
             </Button>
           </div>
           

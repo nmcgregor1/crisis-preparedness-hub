@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import News from "./pages/News";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
+import GetStarted from "./pages/GetStarted";
 import { AuthProvider } from "./contexts/AuthContext";
 import AdminRoute from "./components/AdminRoute";
 import { usePageTracking } from "./hooks/usePageTracking";
@@ -35,6 +36,7 @@ const AppContent = () => {
           <Route path="/resource-library" element={<ResourceLibrary />} />
           <Route path="/incident-monitoring" element={<IncidentMonitoring />} />
           <Route path="/news" element={<News />} />
+          <Route path="/get-started" element={<GetStarted />} />
           <Route path="/admin" element={
             <AdminRoute>
               <Admin />
