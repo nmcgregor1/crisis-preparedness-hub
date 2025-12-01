@@ -8,8 +8,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { FileText, Download, Mail, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
+import { FileText, Mail, ArrowLeft, ArrowRight, CheckCircle, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface FormData {
   // Section 1
@@ -17,6 +18,7 @@ interface FormData {
   location: string;
   employees: string;
   industry: string;
+  email: string;
   // Section 2
   physicalLocation: string;
   sqft: string;
@@ -48,6 +50,7 @@ const initialFormData: FormData = {
   location: '',
   employees: '',
   industry: '',
+  email: '',
   physicalLocation: '',
   sqft: '',
   ownRent: '',
@@ -123,8 +126,8 @@ const ChipSelect = ({
 const GetStarted = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [report, setReport] = useState<string | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const progress = ((currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
@@ -133,10 +136,22 @@ const GetStarted = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return !!(formData.businessName && formData.location && formData.employees && formData.industry);
+        if (!formData.email || !validateEmail(formData.email)) {
+          toast({
+            title: "Please enter a valid email address",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return !!(formData.businessName && formData.location && formData.employees && formData.industry && formData.email);
       case 2:
         return !!(formData.physicalLocation && formData.ownRent);
       case 3:
@@ -154,10 +169,12 @@ const GetStarted = () => {
 
   const nextStep = () => {
     if (!validateStep(currentStep)) {
-      toast({
-        title: "Please complete all required fields",
-        variant: "destructive",
-      });
+      if (currentStep !== 1 || (formData.email && validateEmail(formData.email))) {
+        toast({
+          title: "Please complete all required fields",
+          variant: "destructive",
+        });
+      }
       return;
     }
     if (currentStep < TOTAL_STEPS) {
@@ -171,99 +188,6 @@ const GetStarted = () => {
     }
   };
 
-  const generateReport = (): string => {
-    const now = new Date().toLocaleString();
-    const hazards = formData.hazards.length ? formData.hazards.join(', ') : 'General (localized risk to be assessed)';
-    
-    let report = `${formData.businessName || 'Business'} — Natural Disaster Recovery Plan
-Generated: ${now}
-Location: ${formData.location || 'Unspecified'}
-Employees: ${formData.employees || 'Unspecified'}
-Industry: ${formData.industry || 'Unspecified'}
-
-================================================================================
-EXECUTIVE SUMMARY
-================================================================================
-
-Top identified hazards: ${hazards}
-
-• Key critical functions: ${formData.functions.length ? formData.functions.join(', ') : 'Not specified'}
-• Critical products/services: ${formData.criticalProducts || 'Not specified'}
-• Critical dependencies: ${formData.tools || 'Not specified'}
-• Insurance status: ${formData.insurance || 'Not specified'}
-
-================================================================================
-EMERGENCY RESPONSE PLAN
-================================================================================
-
-IMMEDIATE (0–24 hours):
-• Confirm all staff are safe and accounted for
-• Activate primary communication channel and send initial status message to customers if closure is expected
-${formData.records?.toLowerCase().includes('cloud') || formData.records === 'The cloud' 
-  ? '• Validate remote access to cloud systems and credentials' 
-  : '• Locate and secure local customer records and perform immediate backups to cloud or offsite media'}
-${formData.infrastructure.includes('Server room/on-prem systems') 
-  ? '• If on-prem servers are at risk, power down safely and move critical backups offsite if possible' 
-  : ''}
-
-SHORT-TERM (24–72 hours):
-• Contact key suppliers to determine supply chain impacts and alternatives
-• Assess facility damage and document with photos for insurance claims
-• Set up temporary workspace or remote workflows for essential staff
-
-MEDIUM-TERM (3–7+ days):
-• Begin restoration of operations with focus on highest revenue-generating services
-• File insurance claims (if applicable) and follow up with adjuster
-• Schedule a post-incident review and update the plan based on lessons learned
-
-================================================================================
-TECHNOLOGY & DATA PROTECTION
-================================================================================
-
-Records stored: ${formData.records || 'Not specified'}
-
-Recommendations:
-${formData.tools?.toLowerCase().includes('shopify') || formData.tools?.toLowerCase().includes('square') || formData.tools?.toLowerCase().includes('cloud')
-  ? '• Confirm vendor backup & recovery SLAs and enable multi-factor authentication on admin accounts'
-  : '• Consider migrating critical services (payments, customer records, communications) to managed cloud providers to improve recovery options'}
-• Implement daily automated backups of critical data to a cloud provider
-• Keep local encryption keys stored securely offline
-• Create a rollback and restore runbook with step-by-step for the most critical systems
-
-================================================================================
-PEOPLE & COMMUNICATIONS
-================================================================================
-
-Backup staff availability: ${formData.backupStaff || 'Not specified'}
-Notification preference: ${formData.notifyTime || 'Not specified'} via ${formData.commChannel || 'unspecified'}
-
-Recommendation: Document emergency contacts and test a communication tree quarterly.
-
-================================================================================
-CUSTOM CHECKLIST (PRIORITIZED)
-================================================================================
-
-☐ Ensure emergency contact list is documented and accessible offline
-☐ Identify alternate suppliers for top 3 critical inputs
-☐ Prepare an offline copy of critical customer data (encrypted)
-☐ Train at least one backup staff member for every critical role
-${formData.hazards.length ? `☐ Invest in mitigation steps tailored to risks: ${formData.hazards.join(', ')} (e.g., sandbagging for floods, air filtration for smoke)` : ''}
-${formData.insurance && /No|Unsure/i.test(formData.insurance) ? '☐ Review insurance coverage and consider Business Interruption coverage if not present' : ''}
-
-================================================================================
-NOTES
-================================================================================
-
-This plan is automatically generated from your survey responses. For a more 
-comprehensive plan tailored to your specific situation, consider a follow-up 
-consultation with Crisistance.
-
-Contact: info@crisistance.com
-`;
-
-    return report;
-  };
-
   const handleSubmit = async () => {
     if (!validateStep(currentStep)) {
       toast({
@@ -273,32 +197,32 @@ Contact: info@crisistance.com
       return;
     }
 
-    setIsGenerating(true);
-    
-    // Simulate generation time
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const generatedReport = generateReport();
-    setReport(generatedReport);
-    setIsGenerating(false);
+    setIsSubmitting(true);
 
-    toast({
-      title: "Plan Generated Successfully!",
-      description: "Your disaster recovery plan is ready to download.",
-    });
-  };
+    try {
+      const { data, error } = await supabase.functions.invoke('submit-free-plan', {
+        body: formData,
+      });
 
-  const downloadText = () => {
-    if (!report) return;
-    const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${formData.businessName || 'recovery-plan'}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+      if (error) {
+        throw error;
+      }
+
+      setIsSubmitted(true);
+      toast({
+        title: "Submission Received!",
+        description: "We'll review your information and send your customized plan to your email.",
+      });
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "Please try again or contact us at info@crisistance.com",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const renderStep = () => {
@@ -315,6 +239,16 @@ Contact: info@crisistance.com
                   value={formData.businessName}
                   onChange={(e) => updateField('businessName', e.target.value)}
                   placeholder="ACME Bakery Inc."
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Your email address *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => updateField('email', e.target.value)}
+                  placeholder="you@company.com"
                 />
               </div>
               <div className="space-y-2">
@@ -339,7 +273,7 @@ Contact: info@crisistance.com
                   </SelectContent>
                 </Select>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 md:col-span-2">
                 <Label>Industry *</Label>
                 <Select value={formData.industry} onValueChange={(v) => updateField('industry', v)}>
                   <SelectTrigger>
@@ -630,7 +564,7 @@ Contact: info@crisistance.com
               <div className="space-y-1">
                 <Label htmlFor="consent" className="font-semibold cursor-pointer">Consent & Privacy *</Label>
                 <p className="text-sm text-muted-foreground">
-                  By checking this box you consent to Crisistance using your answers to generate a recovery plan. 
+                  By checking this box you consent to Crisistance using your answers to create a customized recovery plan. 
                   We will not sell your data. For details, see our privacy policy.
                 </p>
               </div>
@@ -643,7 +577,7 @@ Contact: info@crisistance.com
     }
   };
 
-  if (report) {
+  if (isSubmitted) {
     return (
       <div className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -652,35 +586,51 @@ Contact: info@crisistance.com
               <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                 <CheckCircle className="h-8 w-8 text-green-600" />
               </div>
-              <CardTitle className="text-2xl">Your Disaster Recovery Plan is Ready</CardTitle>
-              <CardDescription>
-                A tailored plan has been generated based on your responses. Download it below.
+              <CardTitle className="text-2xl">Thank You!</CardTitle>
+              <CardDescription className="text-lg">
+                We've received your information for {formData.businessName}.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex flex-wrap gap-3 justify-center">
-                <Button onClick={downloadText} className="gap-2">
-                  <Download className="h-4 w-4" />
-                  Download Text File
-                </Button>
-                <Button variant="outline" asChild className="gap-2">
-                  <a href="mailto:info@crisistance.com?subject=Request%20for%20crisis%20support">
-                    <Mail className="h-4 w-4" />
-                    Request Support
-                  </a>
-                </Button>
-              </div>
-              
-              <div className="bg-secondary rounded-lg p-4 max-h-96 overflow-auto">
-                <pre className="whitespace-pre-wrap text-sm font-mono text-foreground">
-                  {report}
-                </pre>
+              <div className="bg-secondary rounded-lg p-6 text-center">
+                <h3 className="font-semibold text-lg mb-2">What happens next?</h3>
+                <p className="text-muted-foreground mb-4">
+                  Our team will review your responses and create a customized disaster recovery plan 
+                  tailored to your business needs. You'll receive your plan via email at:
+                </p>
+                <p className="font-medium text-primary">{formData.email}</p>
               </div>
 
-              <div className="text-center">
-                <Button variant="ghost" onClick={() => { setReport(null); setCurrentStep(1); setFormData(initialFormData); }}>
-                  Generate Another Plan
-                </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 border rounded-lg">
+                  <h4 className="font-semibold mb-2">Need immediate assistance?</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Contact us directly for urgent inquiries or consulting services.
+                  </p>
+                  <Button variant="outline" asChild className="gap-2 w-full">
+                    <a href="mailto:info@crisistance.com">
+                      <Mail className="h-4 w-4" />
+                      Contact Us
+                    </a>
+                  </Button>
+                </div>
+                <div className="p-4 border rounded-lg">
+                  <h4 className="font-semibold mb-2">Start another submission?</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Have another business location that needs a recovery plan?
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => { 
+                      setIsSubmitted(false); 
+                      setCurrentStep(1); 
+                      setFormData(initialFormData); 
+                    }}
+                    className="w-full"
+                  >
+                    New Submission
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -702,8 +652,8 @@ Contact: info@crisistance.com
                   Free Natural Disaster Recovery Plan
                 </h1>
                 <p className="text-muted-foreground">
-                  Get a downloadable disaster recovery plan with 24-hr, 72-hr, and 7-day actions, 
-                  supplier & staff checklists, and prioritized mitigation steps.
+                  Complete this form and we'll create a customized disaster recovery plan 
+                  with 24-hr, 72-hr, and 7-day actions tailored to your business.
                 </p>
               </div>
               <div className="text-right">
@@ -746,9 +696,9 @@ Contact: info@crisistance.com
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               ) : (
-                <Button onClick={handleSubmit} disabled={isGenerating} className="gap-2">
-                  {isGenerating ? 'Generating...' : 'Generate My Plan — Free'}
-                  <FileText className="h-4 w-4" />
+                <Button onClick={handleSubmit} disabled={isSubmitting} className="gap-2">
+                  {isSubmitting ? 'Submitting...' : 'Submit Request'}
+                  <Send className="h-4 w-4" />
                 </Button>
               )}
             </div>

@@ -5,3 +5,6 @@ verify_jwt = true
 
 [functions.discover-news-articles]
 verify_jwt = true
+
+[functions.submit-free-plan]
+verify_jwt = false
