@@ -11,7 +11,6 @@ import { Badge } from '@/components/ui/badge';
 import { FileText, Mail, ArrowLeft, ArrowRight, CheckCircle, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-
 interface FormData {
   // Section 1
   businessName: string;
@@ -44,7 +43,6 @@ interface FormData {
   support: string;
   consent: boolean;
 }
-
 const initialFormData: FormData = {
   businessName: '',
   location: '',
@@ -69,19 +67,17 @@ const initialFormData: FormData = {
   surviveTime: '',
   priority: '',
   support: 'freeResources',
-  consent: false,
+  consent: false
 };
-
 const TOTAL_STEPS = 6;
-
-const ChipSelect = ({ 
-  options, 
-  selected, 
+const ChipSelect = ({
+  options,
+  selected,
   onChange,
-  allowNone = false 
-}: { 
-  options: string[]; 
-  selected: string[]; 
+  allowNone = false
+}: {
+  options: string[];
+  selected: string[];
   onChange: (values: string[]) => void;
   allowNone?: boolean;
 }) => {
@@ -97,57 +93,41 @@ const ChipSelect = ({
       }
     }
   };
-
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((option) => (
-        <Badge
-          key={option}
-          variant={selected.includes(option) ? "default" : "outline"}
-          className="cursor-pointer px-3 py-2 text-sm hover:bg-primary/10 transition-colors"
-          onClick={() => handleClick(option)}
-        >
+  return <div className="flex flex-wrap gap-2">
+      {options.map(option => <Badge key={option} variant={selected.includes(option) ? "default" : "outline"} className="cursor-pointer px-3 py-2 text-sm hover:bg-primary/10 transition-colors" onClick={() => handleClick(option)}>
           {option}
-        </Badge>
-      ))}
-      {allowNone && (
-        <Badge
-          variant={selected.includes('None') ? "default" : "outline"}
-          className="cursor-pointer px-3 py-2 text-sm hover:bg-primary/10 transition-colors"
-          onClick={() => handleClick('None')}
-        >
+        </Badge>)}
+      {allowNone && <Badge variant={selected.includes('None') ? "default" : "outline"} className="cursor-pointer px-3 py-2 text-sm hover:bg-primary/10 transition-colors" onClick={() => handleClick('None')}>
           None of the above
-        </Badge>
-      )}
-    </div>
-  );
+        </Badge>}
+    </div>;
 };
-
 const GetStarted = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
-  const progress = ((currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
-
-  const updateField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const {
+    toast
+  } = useToast();
+  const progress = (currentStep - 1) / (TOTAL_STEPS - 1) * 100;
+  const updateField = <K extends keyof FormData,>(field: K, value: FormData[K]) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
         if (!formData.email || !validateEmail(formData.email)) {
           toast({
             title: "Please enter a valid email address",
-            variant: "destructive",
+            variant: "destructive"
           });
           return false;
         }
@@ -155,9 +135,9 @@ const GetStarted = () => {
       case 2:
         return !!(formData.physicalLocation && formData.ownRent);
       case 3:
-        return !!(formData.records);
+        return !!formData.records;
       case 4:
-        return !!(formData.insurance);
+        return !!formData.insurance;
       case 5:
         return !!(formData.backupStaff && formData.notifyTime && formData.emergencyContacts);
       case 6:
@@ -166,13 +146,12 @@ const GetStarted = () => {
         return true;
     }
   };
-
   const nextStep = () => {
     if (!validateStep(currentStep)) {
-      if (currentStep !== 1 || (formData.email && validateEmail(formData.email))) {
+      if (currentStep !== 1 || formData.email && validateEmail(formData.email)) {
         toast({
           title: "Please complete all required fields",
-          variant: "destructive",
+          variant: "destructive"
         });
       }
       return;
@@ -181,88 +160,67 @@ const GetStarted = () => {
       setCurrentStep(currentStep + 1);
     }
   };
-
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-
   const handleSubmit = async () => {
     if (!validateStep(currentStep)) {
       toast({
         title: "Please complete all required fields",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsSubmitting(true);
-
     try {
-      const { data, error } = await supabase.functions.invoke('submit-free-plan', {
-        body: formData,
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('submit-free-plan', {
+        body: formData
       });
-
       if (error) {
         throw error;
       }
-
       setIsSubmitted(true);
       toast({
         title: "Submission Received!",
-        description: "We'll review your information and send your customized plan to your email.",
+        description: "We'll review your information and send your customized plan to your email."
       });
     } catch (error: any) {
       console.error('Submission error:', error);
       toast({
         title: "Submission Failed",
         description: "Please try again or contact us at info@crisistance.com",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Section 1 — Basic Company Info</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="businessName">Business name *</Label>
-                <Input
-                  id="businessName"
-                  value={formData.businessName}
-                  onChange={(e) => updateField('businessName', e.target.value)}
-                  placeholder="ACME Bakery Inc."
-                />
+                <Input id="businessName" value={formData.businessName} onChange={e => updateField('businessName', e.target.value)} placeholder="ACME Bakery Inc." />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Your email address *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => updateField('email', e.target.value)}
-                  placeholder="you@company.com"
-                />
+                <Input id="email" type="email" value={formData.email} onChange={e => updateField('email', e.target.value)} placeholder="you@company.com" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="location">City, Province *</Label>
-                <Input
-                  id="location"
-                  value={formData.location}
-                  onChange={(e) => updateField('location', e.target.value)}
-                  placeholder="Ottawa, ON"
-                />
+                <Input id="location" value={formData.location} onChange={e => updateField('location', e.target.value)} placeholder="Ottawa, ON" />
               </div>
               <div className="space-y-2">
                 <Label>How many employees? *</Label>
-                <Select value={formData.employees} onValueChange={(v) => updateField('employees', v)}>
+                <Select value={formData.employees} onValueChange={v => updateField('employees', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -275,7 +233,7 @@ const GetStarted = () => {
               </div>
               <div className="space-y-2 md:col-span-2">
                 <Label>Industry *</Label>
-                <Select value={formData.industry} onValueChange={(v) => updateField('industry', v)}>
+                <Select value={formData.industry} onValueChange={v => updateField('industry', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -292,17 +250,14 @@ const GetStarted = () => {
                 </Select>
               </div>
             </div>
-          </div>
-        );
-
+          </div>;
       case 2:
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Section 2 — Physical Location & Infrastructure</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Physical location type *</Label>
-                <Select value={formData.physicalLocation} onValueChange={(v) => updateField('physicalLocation', v)}>
+                <Select value={formData.physicalLocation} onValueChange={v => updateField('physicalLocation', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -316,16 +271,11 @@ const GetStarted = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="sqft">Square footage (approx.)</Label>
-                <Input
-                  id="sqft"
-                  value={formData.sqft}
-                  onChange={(e) => updateField('sqft', e.target.value)}
-                  placeholder="e.g. 1200"
-                />
+                <Input id="sqft" value={formData.sqft} onChange={e => updateField('sqft', e.target.value)} placeholder="e.g. 1200" />
               </div>
               <div className="space-y-2">
                 <Label>Own or rent? *</Label>
-                <Select value={formData.ownRent} onValueChange={(v) => updateField('ownRent', v)}>
+                <Select value={formData.ownRent} onValueChange={v => updateField('ownRent', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -338,51 +288,29 @@ const GetStarted = () => {
             </div>
             <div className="space-y-2">
               <Label>Does your location rely on any of the following? (select all)</Label>
-              <ChipSelect
-                options={['Refrigeration', 'Specialized equipment', 'Hazardous materials', 'Server room/on-prem systems']}
-                selected={formData.infrastructure}
-                onChange={(values) => updateField('infrastructure', values)}
-                allowNone
-              />
+              <ChipSelect options={['Refrigeration', 'Specialized equipment', 'Hazardous materials', 'Server room/on-prem systems']} selected={formData.infrastructure} onChange={values => updateField('infrastructure', values)} allowNone />
             </div>
-          </div>
-        );
-
+          </div>;
       case 3:
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Section 3 — Key Business Operations</h2>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="criticalProducts">What products/services are most critical for revenue?</Label>
-                <Textarea
-                  id="criticalProducts"
-                  value={formData.criticalProducts}
-                  onChange={(e) => updateField('criticalProducts', e.target.value)}
-                  placeholder="Describe your most important products or services..."
-                />
+                <Textarea id="criticalProducts" value={formData.criticalProducts} onChange={e => updateField('criticalProducts', e.target.value)} placeholder="Describe your most important products or services..." />
               </div>
               <div className="space-y-2">
                 <Label>Which functions must stay operational within 24–72 hours?</Label>
-                <ChipSelect
-                  options={['Payments', 'Sales/orders', 'Communications', 'Manufacturing/production', 'Delivery/fulfillment']}
-                  selected={formData.functions}
-                  onChange={(values) => updateField('functions', values)}
-                />
+                <ChipSelect options={['Payments', 'Sales/orders', 'Communications', 'Manufacturing/production', 'Delivery/fulfillment']} selected={formData.functions} onChange={values => updateField('functions', values)} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="tools">Tools/platforms you rely on</Label>
-                  <Input
-                    id="tools"
-                    value={formData.tools}
-                    onChange={(e) => updateField('tools', e.target.value)}
-                    placeholder="e.g. Square, Shopify, Google Workspace"
-                  />
+                  <Input id="tools" value={formData.tools} onChange={e => updateField('tools', e.target.value)} placeholder="e.g. Square, Shopify, Google Workspace" />
                 </div>
                 <div className="space-y-2">
                   <Label>Where are customer records stored? *</Label>
-                  <Select value={formData.records} onValueChange={(v) => updateField('records', v)}>
+                  <Select value={formData.records} onValueChange={v => updateField('records', v)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select..." />
                     </SelectTrigger>
@@ -396,26 +324,19 @@ const GetStarted = () => {
                 </div>
               </div>
             </div>
-          </div>
-        );
-
+          </div>;
       case 4:
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Section 4 — Risk Exposure</h2>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label>Which natural hazards are relevant to your region? (select all)</Label>
-                <ChipSelect
-                  options={['Flooding', 'Wildfire', 'Tornadoes', 'Winter storms', 'Heatwaves', 'Landslides', 'Earthquakes']}
-                  selected={formData.hazards}
-                  onChange={(values) => updateField('hazards', values)}
-                />
+                <ChipSelect options={['Flooding', 'Wildfire', 'Tornadoes', 'Winter storms', 'Heatwaves', 'Landslides', 'Earthquakes']} selected={formData.hazards} onChange={values => updateField('hazards', values)} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Have you experienced a disruption in the last 5 years?</Label>
-                  <Select value={formData.recentDisruption} onValueChange={(v) => updateField('recentDisruption', v)}>
+                  <Select value={formData.recentDisruption} onValueChange={v => updateField('recentDisruption', v)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select..." />
                     </SelectTrigger>
@@ -431,7 +352,7 @@ const GetStarted = () => {
                 </div>
                 <div className="space-y-2">
                   <Label>Insurance that covers interruptions? *</Label>
-                  <Select value={formData.insurance} onValueChange={(v) => updateField('insurance', v)}>
+                  <Select value={formData.insurance} onValueChange={v => updateField('insurance', v)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select..." />
                     </SelectTrigger>
@@ -445,17 +366,14 @@ const GetStarted = () => {
                 </div>
               </div>
             </div>
-          </div>
-        );
-
+          </div>;
       case 5:
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Section 5 — People & Continuity</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Backup staff for critical roles? *</Label>
-                <Select value={formData.backupStaff} onValueChange={(v) => updateField('backupStaff', v)}>
+                <Select value={formData.backupStaff} onValueChange={v => updateField('backupStaff', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -467,7 +385,7 @@ const GetStarted = () => {
               </div>
               <div className="space-y-2">
                 <Label>Staff notification speed needed? *</Label>
-                <Select value={formData.notifyTime} onValueChange={(v) => updateField('notifyTime', v)}>
+                <Select value={formData.notifyTime} onValueChange={v => updateField('notifyTime', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -480,7 +398,7 @@ const GetStarted = () => {
               </div>
               <div className="space-y-2">
                 <Label>Preferred communication channel</Label>
-                <Select value={formData.commChannel} onValueChange={(v) => updateField('commChannel', v)}>
+                <Select value={formData.commChannel} onValueChange={v => updateField('commChannel', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -493,7 +411,7 @@ const GetStarted = () => {
               </div>
               <div className="space-y-2">
                 <Label>Documented emergency contacts? *</Label>
-                <Select value={formData.emergencyContacts} onValueChange={(v) => updateField('emergencyContacts', v)}>
+                <Select value={formData.emergencyContacts} onValueChange={v => updateField('emergencyContacts', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -504,17 +422,14 @@ const GetStarted = () => {
                 </Select>
               </div>
             </div>
-          </div>
-        );
-
+          </div>;
       case 6:
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Section 6 — Recovery Priorities</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Survival time during full outage? *</Label>
-                <Select value={formData.surviveTime} onValueChange={(v) => updateField('surviveTime', v)}>
+                <Select value={formData.surviveTime} onValueChange={v => updateField('surviveTime', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -528,7 +443,7 @@ const GetStarted = () => {
               </div>
               <div className="space-y-2">
                 <Label>Most important recovery? *</Label>
-                <Select value={formData.priority} onValueChange={(v) => updateField('priority', v)}>
+                <Select value={formData.priority} onValueChange={v => updateField('priority', v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select..." />
                   </SelectTrigger>
@@ -544,7 +459,7 @@ const GetStarted = () => {
             </div>
             <div className="space-y-2">
               <Label>Would you like additional support or training?</Label>
-              <Select value={formData.support} onValueChange={(v) => updateField('support', v)}>
+              <Select value={formData.support} onValueChange={v => updateField('support', v)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -556,11 +471,7 @@ const GetStarted = () => {
               </Select>
             </div>
             <div className="flex items-start space-x-3 p-4 bg-secondary rounded-lg">
-              <Checkbox
-                id="consent"
-                checked={formData.consent}
-                onCheckedChange={(checked) => updateField('consent', checked as boolean)}
-              />
+              <Checkbox id="consent" checked={formData.consent} onCheckedChange={checked => updateField('consent', checked as boolean)} />
               <div className="space-y-1">
                 <Label htmlFor="consent" className="font-semibold cursor-pointer">Consent & Privacy *</Label>
                 <p className="text-sm text-muted-foreground">
@@ -569,17 +480,13 @@ const GetStarted = () => {
                 </p>
               </div>
             </div>
-          </div>
-        );
-
+          </div>;
       default:
         return null;
     }
   };
-
   if (isSubmitted) {
-    return (
-      <div className="py-12">
+    return <div className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card>
             <CardHeader className="text-center">
@@ -619,15 +526,11 @@ const GetStarted = () => {
                   <p className="text-sm text-muted-foreground mb-3">
                     Have another business location that needs a recovery plan?
                   </p>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => { 
-                      setIsSubmitted(false); 
-                      setCurrentStep(1); 
-                      setFormData(initialFormData); 
-                    }}
-                    className="w-full"
-                  >
+                  <Button variant="outline" onClick={() => {
+                  setIsSubmitted(false);
+                  setCurrentStep(1);
+                  setFormData(initialFormData);
+                }} className="w-full">
                     New Submission
                   </Button>
                 </div>
@@ -635,12 +538,9 @@ const GetStarted = () => {
             </CardContent>
           </Card>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="py-12">
+  return <div className="py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Intro Card */}
         <Card className="mb-8 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
@@ -657,7 +557,7 @@ const GetStarted = () => {
                 </p>
               </div>
               <div className="text-right">
-                <Badge variant="secondary" className="mb-2">Free for ≤50 employees</Badge>
+                <Badge variant="secondary" className="mb-2">Free for ≤25 employees</Badge>
                 <p className="text-xs text-muted-foreground">No payment, no ads.</p>
               </div>
             </div>
@@ -680,27 +580,18 @@ const GetStarted = () => {
 
             {/* Navigation */}
             <div className="flex justify-between mt-8 pt-6 border-t">
-              <Button
-                variant="outline"
-                onClick={prevStep}
-                disabled={currentStep === 1}
-                className="gap-2"
-              >
+              <Button variant="outline" onClick={prevStep} disabled={currentStep === 1} className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Back
               </Button>
               
-              {currentStep < TOTAL_STEPS ? (
-                <Button onClick={nextStep} className="gap-2">
+              {currentStep < TOTAL_STEPS ? <Button onClick={nextStep} className="gap-2">
                   Next
                   <ArrowRight className="h-4 w-4" />
-                </Button>
-              ) : (
-                <Button onClick={handleSubmit} disabled={isSubmitting} className="gap-2">
+                </Button> : <Button onClick={handleSubmit} disabled={isSubmitting} className="gap-2">
                   {isSubmitting ? 'Submitting...' : 'Submit Request'}
                   <Send className="h-4 w-4" />
-                </Button>
-              )}
+                </Button>}
             </div>
           </CardContent>
         </Card>
@@ -710,8 +601,6 @@ const GetStarted = () => {
           <p>Need help? <a href="mailto:info@crisistance.com" className="text-primary hover:underline">info@crisistance.com</a></p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default GetStarted;
