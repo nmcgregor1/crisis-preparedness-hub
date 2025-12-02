@@ -557,7 +557,7 @@ const GetStarted = () => {
                 </p>
               </div>
               <div className="text-right">
-                <Badge variant="secondary" className="mb-2">Free for ≤25 employees</Badge>
+                <Badge variant="secondary" className="mb-2 pl-0 mx-[10px]">Free for ≤25 employees</Badge>
                 <p className="text-xs text-muted-foreground">No payment, no ads.</p>
               </div>
             </div>
