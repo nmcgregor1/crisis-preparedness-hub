@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "managedService": "Managed Service",
+    "incidentMonitoring": "Incident Monitoring",
+    "resources": "Resources",
+    "news": "News",
+    "admin": "Admin",
+    "contact": "Contact",
+    "freePlan": "Free Plan"
+  },
+  "hero": {
+    "title": "Be Prepared...Respond with Purpose",
+    "subtitle": "Crisis Management for Small Business"
+  },
+  "footer": {
+    "tagline": "Crisis Management for Small Business",
+    "services": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "legalPrivacy": "Legal & Privacy",
+    "copyright": "© {{year}} Crisistance. All rights reserved."
+  },
+  "home": {
+    "planning": {
+      "title": "Planning",
+      "description": "Comprehensive crisis preparation strategies tailored to your business needs."
+    },
+    "managedService": {
+      "title": "Managed Service",
+      "description": "Expert-led crisis management support when you need it most."
+    },
+    "disasterRecovery": {
+      "title": "Disaster Recovery",
+      "description": "Rapid recovery solutions to get your business back on track quickly."
+    },
+    "whyChoose": "Why Choose Crisistance?",
+    "smallBusinessFocus": {
+      "title": "Small Business Focus",
+      "description": "Tailored solutions for small business constraints and resources."
+    },
+    "provenMethods": {
+      "title": "Proven Methods",
+      "description": "Evidence-based crisis management frameworks that work."
+    },
+    "rapidResponse": {
+      "title": "Rapid Response",
+      "description": "Quick deployment when crisis strikes your business."
+    },
+    "affordableProtection": {
+      "title": "Affordable Protection",
+      "description": "Enterprise-level crisis management at small business prices."
+    },
+    "crisisTypes": "Crisis Types We Handle",
+    "operational": {
+      "title": "Operational Crises",
+      "description": "Supply chain disruptions, system failures, and operational breakdowns."
+    },
+    "financial": {
+      "title": "Financial Emergencies",
+      "description": "Cash flow crises, unexpected expenses, and financial market volatility."
+    },
+    "reputational": {
+      "title": "Reputational Threats",
+      "description": "Public relations crises, social media incidents, and brand damage control."
+    },
+    "natural": {
+      "title": "Natural Disasters",
+      "description": "Weather events, earthquakes, floods, and other natural catastrophes."
+    },
+    "ctaTitle": "Ready to Protect Your Business?",
+    "ctaDescription": "Don't wait for crisis to strike. Get prepared today with Crisistance.",
+    "ctaButton": "Contact us to get started"
+  },
+  "about": {
+    "title": "About Crisistance",
+    "description": "We help small businesses prepare for, respond to, and recover from crises with purpose-built solutions that fit your needs and budget.",
+    "missionTitle": "Our Mission",
+    "missionP1": "Small businesses are the backbone of our economy, yet they often lack the resources for comprehensive crisis management. We bridge that gap by providing enterprise-level crisis preparedness and response capabilities at a scale and price point that works for small business owners.",
+    "missionP2": "Our approach combines proven methodologies with practical implementation, ensuring your business can weather any storm and emerge stronger.",
+    "learnHow": "Learn How We Can Help",
+    "purposeDriven": {
+      "title": "Purpose-Driven",
+      "description": "Every solution is designed with small business realities in mind."
+    },
+    "expertTeam": {
+      "title": "Expert Team",
+      "description": "Crisis management professionals with real-world experience."
+    },
+    "provenResults": {
+      "title": "Proven Results",
+      "description": "Track record of helping businesses survive and thrive through crises."
+    },
+    "howItWorks": "How It Works",
+    "assessment": {
+      "title": "Assessment",
+      "description": "We evaluate your business vulnerabilities, resources, and specific risk profile to understand your unique needs."
+    },
+    "planning": {
+      "title": "Planning",
+      "description": "Together, we develop comprehensive crisis management plans tailored to your business size, industry, and budget constraints."
+    },
+    "protection": {
+      "title": "Protection",
+      "description": "Your business is prepared with actionable plans, ongoing monitoring, and rapid response capabilities when crises occur."
+    },
+    "trustedTitle": "Trusted by Small Business Owners",
+    "trustedP1": "Our team brings decades of combined experience in crisis management, business continuity, and small business operations. We understand both the theory and the practical realities of keeping a small business running during turbulent times.",
+    "trustedP2": "From family-owned restaurants to growing tech startups, we've helped businesses across industries prepare for and navigate through their most challenging moments.",
+    "startProtection": "Start Your Protection Today"
+  },
+  "contact": {
+    "title": "Contact & Support",
+    "description": "Ready to protect your business? Get in touch with our crisis management experts.",
+    "formTitle": "Get Started Today",
+    "formDescription": "Fill out the form below and we'll contact you within 24 hours to discuss your crisis management needs.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Business Email",
+    "company": "Company Name",
+    "phone": "Phone Number (Optional)",
+    "message": "Tell us about your business and crisis management needs",
+    "messagePlaceholder": "Describe your business, current challenges, and what type of crisis management support you're looking for...",
+    "submit": "Contact us to get started",
+    "submitting": "Submitting...",
+    "successMessage": "Thank you! We'll contact you within 24 hours.",
+    "emailSupport": "Email Support",
+    "emailDescription": "For general inquiries and support:",
+    "emergencyHotline": "Emergency Hotline",
+    "emergencyDescription": "24/7 crisis response for existing clients:",
+    "responseTimes": "Response Times",
+    "generalInquiries": "General Inquiries:",
+    "crisisSupport": "Crisis Support:",
+    "consultationBooking": "Consultation Booking:",
+    "immediate": "Immediate",
+    "sameDay": "Same day",
+    "whatHappensNext": "What Happens Next?",
+    "step1": "We'll review your submission and contact you within 24 hours",
+    "step2": "Schedule a free 30-minute consultation to assess your needs",
+    "step3": "Receive a customized crisis management proposal",
+    "step4": "Begin implementing your protection plan immediately",
+    "required": "*"
+  },
+  "managedService": {
+    "title": "Managed Crisis Response Service",
+    "description": "Expert-led crisis management support when you need it most. Our managed service provides 24/7 crisis response capabilities tailored for small businesses.",
+    "learnMore": "Learn More About This Service",
+    "comingSoonTitle": "Comprehensive Service Details Coming Soon",
+    "comingSoonDescription": "We're finalizing the details of our managed service offering. This page will soon include detailed information about our crisis response protocols, service levels, pricing, and case studies.",
+    "contactPrompt": "In the meantime, contact us to discuss your specific crisis management needs.",
+    "contactTeam": "Contact Our Team"
+  },
+  "incidentMonitoring": {
+    "title": "Incident Monitoring & Early Warning",
+    "description": "Proactive monitoring systems to detect potential crises before they impact your business operations.",
+    "learnMore": "Learn About Our Monitoring",
+    "comingSoonTitle": "Monitoring Service Details Coming Soon",
+    "comingSoonDescription": "We're developing advanced monitoring capabilities that will help small businesses detect and prepare for potential crises before they occur. This page will soon detail our monitoring systems, alert protocols, and integration options.",
+    "contactPrompt": "Contact us to discuss your monitoring needs and learn about our current early warning capabilities.",
+    "discussOptions": "Discuss Monitoring Options"
+  },
+  "resources": {
+    "title": "Crisis Management Resource Library",
+    "description": "Essential tools, templates, and guides for small business crisis preparedness and response planning.",
+    "requestAccess": "Request Access to Resources",
+    "quickLinks": "Quick Links",
+    "householdHazards": "Household & Environmental Hazards",
+    "cyberSecurity": "Cyber & Ransomware (SMBs)",
+    "financialResilience": "Financial / Supply chain resilience",
+    "householdTitle": "Household & Environmental Hazards (Canada)",
+    "cyberTitle": "Cybersecurity & Ransomware (SMB focus)",
+    "financialTitle": "Financial Resilience & Supply-Chain Risk",
+    "wantDownloads": "Want these as downloads?",
+    "lastUpdated": "Last updated: September 12, 2025",
+    "requestCustom": "Request Custom Resources"
+  },
+  "legal": {
+    "title": "Legal Information & Privacy",
+    "description": "Important legal disclaimers, privacy policies, and consent information.",
+    "canadaTitle": "Canada - Legal Disclaimers",
+    "canadaDescription": "For Canadian clients and operations:",
+    "usTitle": "United States - Legal Disclaimers",
+    "usDescription": "For US clients and operations:",
+    "globalTitle": "Global Operations - General Disclaimers",
+    "globalDescription": "For clients in other jurisdictions:",
+    "privacyTitle": "Privacy Policy & Consent",
+    "infoCollection": "Information Collection",
+    "infoUse": "Information Use",
+    "dataSecurity": "Data Security",
+    "consent": "Consent",
+    "privacyContact": "Contact for Privacy Matters",
+    "lastUpdated": "Last updated:",
+    "updateNotice": "We may update these terms from time to time. Clients will be notified of material changes via email or through our service platform."
+  },
+  "partners": {
+    "title": "Strategic Partners & Alliances",
+    "description": "Collaborating with industry leaders to deliver comprehensive crisis management solutions for small businesses.",
+    "explorePartnership": "Explore Partnership Opportunities",
+    "comingSoonTitle": "Partner Information Coming Soon",
+    "comingSoonDescription": "We're building strategic partnerships with technology providers, emergency services, business consultants, and industry specialists to enhance our crisis management capabilities. This page will soon showcase our partner network and collaboration opportunities.",
+    "contactPrompt": "Interested in partnering with Crisistance or learning about our current partnerships? Contact us to explore opportunities.",
+    "discussPartnerships": "Discuss Partnerships"
+  },
+  "getStarted": {
+    "title": "Get Your Free Plan",
+    "section1Title": "Section 1 — Basic Company Info",
+    "section2Title": "Section 2 — Physical Location & Infrastructure",
+    "section3Title": "Section 3 — Key Business Operations",
+    "section4Title": "Section 4 — Risk Exposure",
+    "section5Title": "Section 5 — People & Continuity",
+    "section6Title": "Section 6 — Final Priorities",
+    "businessName": "Business name",
+    "email": "Your email address",
+    "location": "City, Province",
+    "employees": "How many employees?",
+    "industry": "Industry",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit My Assessment",
+    "submitting": "Submitting...",
+    "successTitle": "Submission Received!",
+    "successDescription": "We'll review your information and send your customized plan to your email."
+  },
+  "common": {
+    "24hours": "24 hours"
+  }
+}

@@ -1,12 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Shield, Users, AlertTriangle, CheckCircle } from 'lucide-react';
-const Home = () => {
-  return <div>
-      {/* Hero Section */}
-      
 
+const Home = () => {
+  const { t } = useTranslation();
+
+  return <div>
       {/* Service Cards */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,11 +17,11 @@ const Home = () => {
                 <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <CheckCircle className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Planning</CardTitle>
+                <CardTitle>{t('home.planning.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Comprehensive crisis preparation strategies tailored to your business needs.
+                  {t('home.planning.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -30,11 +31,11 @@ const Home = () => {
                 <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Users className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Managed Service</CardTitle>
+                <CardTitle>{t('home.managedService.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Expert-led crisis management support when you need it most.
+                  {t('home.managedService.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -44,11 +45,11 @@ const Home = () => {
                 <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Shield className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Disaster Recovery</CardTitle>
+                <CardTitle>{t('home.disasterRecovery.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Rapid recovery solutions to get your business back on track quickly.
+                  {t('home.disasterRecovery.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -60,31 +61,31 @@ const Home = () => {
       <section className="bg-secondary py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-primary text-center mb-12">
-            Why Choose Crisistance?
+            {t('home.whyChoose')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <h3 className="font-semibold text-primary mb-2">Small Business Focus</h3>
+              <h3 className="font-semibold text-primary mb-2">{t('home.smallBusinessFocus.title')}</h3>
               <p className="text-sm text-muted-foreground">
-                Tailored solutions for small business constraints and resources.
+                {t('home.smallBusinessFocus.description')}
               </p>
             </div>
             <div className="text-center">
-              <h3 className="font-semibold text-primary mb-2">Proven Methods</h3>
+              <h3 className="font-semibold text-primary mb-2">{t('home.provenMethods.title')}</h3>
               <p className="text-sm text-muted-foreground">
-                Evidence-based crisis management frameworks that work.
+                {t('home.provenMethods.description')}
               </p>
             </div>
             <div className="text-center">
-              <h3 className="font-semibold text-primary mb-2">Rapid Response</h3>
+              <h3 className="font-semibold text-primary mb-2">{t('home.rapidResponse.title')}</h3>
               <p className="text-sm text-muted-foreground">
-                Quick deployment when crisis strikes your business.
+                {t('home.rapidResponse.description')}
               </p>
             </div>
             <div className="text-center">
-              <h3 className="font-semibold text-primary mb-2">Affordable Protection</h3>
+              <h3 className="font-semibold text-primary mb-2">{t('home.affordableProtection.title')}</h3>
               <p className="text-sm text-muted-foreground">
-                Enterprise-level crisis management at small business prices.
+                {t('home.affordableProtection.description')}
               </p>
             </div>
           </div>
@@ -95,7 +96,7 @@ const Home = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-primary text-center mb-12">
-            Crisis Types We Handle
+            {t('home.crisisTypes')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex items-start space-x-4">
@@ -103,9 +104,9 @@ const Home = () => {
                 <AlertTriangle className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <h3 className="font-semibold text-primary mb-2">Operational Crises</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('home.operational.title')}</h3>
                 <p className="text-muted-foreground">
-                  Supply chain disruptions, system failures, and operational breakdowns.
+                  {t('home.operational.description')}
                 </p>
               </div>
             </div>
@@ -115,9 +116,9 @@ const Home = () => {
                 <AlertTriangle className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <h3 className="font-semibold text-primary mb-2">Financial Emergencies</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('home.financial.title')}</h3>
                 <p className="text-muted-foreground">
-                  Cash flow crises, unexpected expenses, and financial market volatility.
+                  {t('home.financial.description')}
                 </p>
               </div>
             </div>
@@ -127,9 +128,9 @@ const Home = () => {
                 <AlertTriangle className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <h3 className="font-semibold text-primary mb-2">Reputational Threats</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('home.reputational.title')}</h3>
                 <p className="text-muted-foreground">
-                  Public relations crises, social media incidents, and brand damage control.
+                  {t('home.reputational.description')}
                 </p>
               </div>
             </div>
@@ -139,9 +140,9 @@ const Home = () => {
                 <AlertTriangle className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <h3 className="font-semibold text-primary mb-2">Natural Disasters</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('home.natural.title')}</h3>
                 <p className="text-muted-foreground">
-                  Weather events, earthquakes, floods, and other natural catastrophes.
+                  {t('home.natural.description')}
                 </p>
               </div>
             </div>
@@ -153,13 +154,13 @@ const Home = () => {
       <section className="bg-primary py-16">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-primary-foreground mb-6">
-            Ready to Protect Your Business?
+            {t('home.ctaTitle')}
           </h2>
           <p className="text-lg text-primary-foreground/90 mb-8">
-            Don't wait for crisis to strike. Get prepared today with Crisistance.
+            {t('home.ctaDescription')}
           </p>
           <Button asChild size="lg" variant="accent">
-            <Link to="/contact">Contact us to get started</Link>
+            <Link to="/contact">{t('home.ctaButton')}</Link>
           </Button>
         </div>
       </section>

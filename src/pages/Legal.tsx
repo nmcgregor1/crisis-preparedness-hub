@@ -1,18 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { AlertTriangle, Shield, MapPin } from 'lucide-react';
 
 const Legal = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       {/* Hero Section */}
       <section className="bg-secondary py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-primary mb-6">
-            Legal Information & Privacy
+            {t('legal.title')}
           </h1>
           <p className="text-lg text-muted-foreground">
-            Important legal disclaimers, privacy policies, and consent information.
+            {t('legal.description')}
           </p>
         </div>
       </section>
@@ -23,11 +26,11 @@ const Legal = () => {
           <Card>
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
               <MapPin className="h-6 w-6 text-primary mr-3" />
-              <CardTitle>Canada - Legal Disclaimers</CardTitle>
+              <CardTitle>{t('legal.canadaTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <CardDescription>
-                For Canadian clients and operations:
+                {t('legal.canadaDescription')}
               </CardDescription>
               <div className="text-sm space-y-2">
                 <p>
@@ -53,11 +56,11 @@ const Legal = () => {
           <Card>
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
               <MapPin className="h-6 w-6 text-primary mr-3" />
-              <CardTitle>United States - Legal Disclaimers</CardTitle>
+              <CardTitle>{t('legal.usTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <CardDescription>
-                For US clients and operations:
+                {t('legal.usDescription')}
               </CardDescription>
               <div className="text-sm space-y-2">
                 <p>
@@ -82,11 +85,11 @@ const Legal = () => {
           <Card>
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
               <AlertTriangle className="h-6 w-6 text-accent mr-3" />
-              <CardTitle>Global Operations - General Disclaimers</CardTitle>
+              <CardTitle>{t('legal.globalTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <CardDescription>
-                For clients in other jurisdictions:
+                {t('legal.globalDescription')}
               </CardDescription>
               <div className="text-sm space-y-2">
                 <p>
@@ -118,11 +121,11 @@ const Legal = () => {
           <Card>
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">
               <Shield className="h-6 w-6 text-primary mr-3" />
-              <CardTitle>Privacy Policy & Consent</CardTitle>
+              <CardTitle>{t('legal.privacyTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="font-semibold text-primary mb-2">Information Collection</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('legal.infoCollection')}</h3>
                 <p className="text-sm text-muted-foreground">
                   We collect only the information necessary to provide our crisis management 
                   services, including business contact details, operational information, and 
@@ -131,7 +134,7 @@ const Legal = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold text-primary mb-2">Information Use</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('legal.infoUse')}</h3>
                 <p className="text-sm text-muted-foreground">
                   Client information is used solely for service delivery, crisis response 
                   coordination, and business communication. We do not sell, rent, or share 
@@ -141,7 +144,7 @@ const Legal = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold text-primary mb-2">Data Security</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('legal.dataSecurity')}</h3>
                 <p className="text-sm text-muted-foreground">
                   We implement industry-standard security measures to protect client data. 
                   However, no electronic system is completely secure, and clients acknowledge 
@@ -150,7 +153,7 @@ const Legal = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold text-primary mb-2">Consent</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('legal.consent')}</h3>
                 <p className="text-sm text-muted-foreground">
                   By engaging our services, clients consent to our collection, use, and 
                   storage of information as described in this policy and as necessary for 
@@ -159,7 +162,7 @@ const Legal = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold text-primary mb-2">Contact for Privacy Matters</h3>
+                <h3 className="font-semibold text-primary mb-2">{t('legal.privacyContact')}</h3>
                 <p className="text-sm text-muted-foreground">
                   For questions about our privacy practices or to exercise your privacy rights, 
                   contact us at{' '}
@@ -180,15 +183,14 @@ const Legal = () => {
       <section className="bg-secondary py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Last updated: {new Date().toLocaleDateString('en-US', { 
+            {t('legal.lastUpdated')} {new Date().toLocaleDateString('en-US', { 
               year: 'numeric', 
               month: 'long', 
               day: 'numeric' 
             })}
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            We may update these terms from time to time. Clients will be notified of 
-            material changes via email or through our service platform.
+            {t('legal.updateNotice')}
           </p>
         </div>
       </section>

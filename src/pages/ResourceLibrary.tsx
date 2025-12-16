@@ -1,21 +1,23 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const ResourceLibrary = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       {/* Hero Section */}
       <section className="bg-secondary py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-primary mb-6">
-            Crisis Management Resource Library
+            {t('resources.title')}
           </h1>
           <p className="text-lg text-muted-foreground mb-8">
-            Essential tools, templates, and guides for small business crisis preparedness 
-            and response planning.
+            {t('resources.description')}
           </p>
           <Button asChild size="lg" variant="accent">
-            <Link to="/contact">Request Access to Resources</Link>
+            <Link to="/contact">{t('resources.requestAccess')}</Link>
           </Button>
         </div>
       </section>
@@ -23,11 +25,11 @@ const ResourceLibrary = () => {
       {/* Quick Navigation */}
       <nav className="py-8 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-lg font-semibold text-primary mb-4">Quick Links</h2>
+          <h2 className="text-lg font-semibold text-primary mb-4">{t('resources.quickLinks')}</h2>
           <ul className="flex flex-wrap gap-4 text-sm">
-            <li><a href="#household" className="text-primary hover:text-primary/80 underline">Household & Environmental Hazards</a></li>
-            <li><a href="#cyber" className="text-primary hover:text-primary/80 underline">Cyber & Ransomware (SMBs)</a></li>
-            <li><a href="#financial" className="text-primary hover:text-primary/80 underline">Financial / Supply chain resilience</a></li>
+            <li><a href="#household" className="text-primary hover:text-primary/80 underline">{t('resources.householdHazards')}</a></li>
+            <li><a href="#cyber" className="text-primary hover:text-primary/80 underline">{t('resources.cyberSecurity')}</a></li>
+            <li><a href="#financial" className="text-primary hover:text-primary/80 underline">{t('resources.financialResilience')}</a></li>
           </ul>
         </div>
       </nav>
@@ -35,7 +37,7 @@ const ResourceLibrary = () => {
       {/* Household & Environmental Hazards */}
       <section id="household" className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-primary mb-8">Household & Environmental Hazards (Canada)</h2>
+          <h2 className="text-3xl font-bold text-primary mb-8">{t('resources.householdTitle')}</h2>
           <div className="space-y-8">
             <div className="border border-border rounded-lg p-6 bg-card">
               <h3 className="text-xl font-semibold text-primary mb-3">1. Canadian 72-hour Home Emergency Kit — Printable Checklist</h3>
@@ -113,7 +115,7 @@ const ResourceLibrary = () => {
       {/* Cybersecurity & Ransomware */}
       <section id="cyber" className="py-16 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-primary mb-8">Cybersecurity & Ransomware (SMB focus)</h2>
+          <h2 className="text-3xl font-bold text-primary mb-8">{t('resources.cyberTitle')}</h2>
           <div className="space-y-8">
             <div className="border border-border rounded-lg p-6 bg-card">
               <h3 className="text-xl font-semibold text-primary mb-3">7. Ransomware Prevention & Recovery Playbook — Small Business Summary</h3>
@@ -161,7 +163,7 @@ const ResourceLibrary = () => {
       {/* Financial Resilience */}
       <section id="financial" className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-primary mb-8">Financial Resilience & Supply-Chain Risk</h2>
+          <h2 className="text-3xl font-bold text-primary mb-8">{t('resources.financialTitle')}</h2>
           <div className="space-y-8">
             <div className="border border-border rounded-lg p-6 bg-card">
               <h3 className="text-xl font-semibold text-primary mb-3">11. Business Continuity Plan (BCP) Template for Canadian SMEs — 8-Step Guide + Download</h3>
@@ -200,14 +202,14 @@ const ResourceLibrary = () => {
       <section className="py-12 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-lg font-semibold text-primary mb-4">
-            Want these as downloads?
+            {t('resources.wantDownloads')}
           </p>
           <p className="text-sm text-muted-foreground">
-            Last updated: September 12, 2025
+            {t('resources.lastUpdated')}
           </p>
           <div className="mt-6">
             <Button asChild>
-              <Link to="/contact">Request Custom Resources</Link>
+              <Link to="/contact">{t('resources.requestCustom')}</Link>
             </Button>
           </div>
         </div>
