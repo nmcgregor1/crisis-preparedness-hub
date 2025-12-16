@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "managedService": "Service géré",
+    "incidentMonitoring": "Surveillance des incidents",
+    "resources": "Ressources",
+    "news": "Actualités",
+    "admin": "Administration",
+    "contact": "Contact",
+    "freePlan": "Plan gratuit"
+  },
+  "hero": {
+    "title": "Soyez préparé... Répondez avec détermination",
+    "subtitle": "Gestion de crise pour les petites entreprises"
+  },
+  "footer": {
+    "tagline": "Gestion de crise pour les petites entreprises",
+    "services": "Services",
+    "company": "Entreprise",
+    "legal": "Juridique",
+    "legalPrivacy": "Juridique et confidentialité",
+    "copyright": "© {{year}} Crisistance. Tous droits réservés."
+  },
+  "home": {
+    "planning": {
+      "title": "Planification",
+      "description": "Stratégies complètes de préparation aux crises adaptées aux besoins de votre entreprise."
+    },
+    "managedService": {
+      "title": "Service géré",
+      "description": "Soutien expert en gestion de crise quand vous en avez le plus besoin."
+    },
+    "disasterRecovery": {
+      "title": "Reprise après sinistre",
+      "description": "Solutions de reprise rapide pour remettre votre entreprise sur les rails."
+    },
+    "whyChoose": "Pourquoi choisir Crisistance?",
+    "smallBusinessFocus": {
+      "title": "Focus PME",
+      "description": "Solutions adaptées aux contraintes et ressources des petites entreprises."
+    },
+    "provenMethods": {
+      "title": "Méthodes éprouvées",
+      "description": "Cadres de gestion de crise fondés sur des preuves qui fonctionnent."
+    },
+    "rapidResponse": {
+      "title": "Réponse rapide",
+      "description": "Déploiement rapide lorsqu'une crise frappe votre entreprise."
+    },
+    "affordableProtection": {
+      "title": "Protection abordable",
+      "description": "Gestion de crise de niveau entreprise à des prix pour PME."
+    },
+    "crisisTypes": "Types de crises que nous gérons",
+    "operational": {
+      "title": "Crises opérationnelles",
+      "description": "Perturbations de la chaîne d'approvisionnement, pannes de systèmes et dysfonctionnements opérationnels."
+    },
+    "financial": {
+      "title": "Urgences financières",
+      "description": "Crises de trésorerie, dépenses imprévues et volatilité des marchés financiers."
+    },
+    "reputational": {
+      "title": "Menaces réputationnelles",
+      "description": "Crises de relations publiques, incidents sur les médias sociaux et contrôle des dommages à la marque."
+    },
+    "natural": {
+      "title": "Catastrophes naturelles",
+      "description": "Événements météorologiques, tremblements de terre, inondations et autres catastrophes naturelles."
+    },
+    "ctaTitle": "Prêt à protéger votre entreprise?",
+    "ctaDescription": "N'attendez pas qu'une crise survienne. Préparez-vous dès aujourd'hui avec Crisistance.",
+    "ctaButton": "Contactez-nous pour commencer"
+  },
+  "about": {
+    "title": "À propos de Crisistance",
+    "description": "Nous aidons les petites entreprises à se préparer, à répondre et à se remettre des crises avec des solutions conçues pour répondre à vos besoins et à votre budget.",
+    "missionTitle": "Notre mission",
+    "missionP1": "Les petites entreprises sont l'épine dorsale de notre économie, mais elles manquent souvent de ressources pour une gestion complète des crises. Nous comblons ce fossé en fournissant des capacités de préparation et de réponse aux crises de niveau entreprise à une échelle et un prix adaptés aux propriétaires de petites entreprises.",
+    "missionP2": "Notre approche combine des méthodologies éprouvées avec une mise en œuvre pratique, garantissant que votre entreprise peut résister à toute tempête et en ressortir plus forte.",
+    "learnHow": "Découvrez comment nous pouvons vous aider",
+    "purposeDriven": {
+      "title": "Orienté vers l'objectif",
+      "description": "Chaque solution est conçue en tenant compte des réalités des petites entreprises."
+    },
+    "expertTeam": {
+      "title": "Équipe d'experts",
+      "description": "Professionnels de la gestion de crise avec une expérience concrète."
+    },
+    "provenResults": {
+      "title": "Résultats prouvés",
+      "description": "Bilan d'aide aux entreprises pour survivre et prospérer à travers les crises."
+    },
+    "howItWorks": "Comment ça fonctionne",
+    "assessment": {
+      "title": "Évaluation",
+      "description": "Nous évaluons les vulnérabilités de votre entreprise, vos ressources et votre profil de risque spécifique pour comprendre vos besoins uniques."
+    },
+    "planning": {
+      "title": "Planification",
+      "description": "Ensemble, nous développons des plans complets de gestion de crise adaptés à la taille de votre entreprise, votre industrie et vos contraintes budgétaires."
+    },
+    "protection": {
+      "title": "Protection",
+      "description": "Votre entreprise est préparée avec des plans d'action, une surveillance continue et des capacités de réponse rapide en cas de crise."
+    },
+    "trustedTitle": "Approuvé par les propriétaires de petites entreprises",
+    "trustedP1": "Notre équipe apporte des décennies d'expérience combinée en gestion de crise, continuité des affaires et opérations de petites entreprises. Nous comprenons à la fois la théorie et les réalités pratiques du maintien d'une petite entreprise pendant les périodes turbulentes.",
+    "trustedP2": "Des restaurants familiaux aux startups technologiques en croissance, nous avons aidé des entreprises de toutes les industries à se préparer et à naviguer à travers leurs moments les plus difficiles.",
+    "startProtection": "Commencez votre protection aujourd'hui"
+  },
+  "contact": {
+    "title": "Contact et support",
+    "description": "Prêt à protéger votre entreprise? Contactez nos experts en gestion de crise.",
+    "formTitle": "Commencez aujourd'hui",
+    "formDescription": "Remplissez le formulaire ci-dessous et nous vous contacterons dans les 24 heures pour discuter de vos besoins en gestion de crise.",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Courriel professionnel",
+    "company": "Nom de l'entreprise",
+    "phone": "Numéro de téléphone (facultatif)",
+    "message": "Parlez-nous de votre entreprise et de vos besoins en gestion de crise",
+    "messagePlaceholder": "Décrivez votre entreprise, vos défis actuels et le type de soutien en gestion de crise que vous recherchez...",
+    "submit": "Contactez-nous pour commencer",
+    "submitting": "Envoi en cours...",
+    "successMessage": "Merci! Nous vous contacterons dans les 24 heures.",
+    "emailSupport": "Support par courriel",
+    "emailDescription": "Pour les demandes générales et le support:",
+    "emergencyHotline": "Ligne d'urgence",
+    "emergencyDescription": "Réponse de crise 24/7 pour les clients existants:",
+    "responseTimes": "Délais de réponse",
+    "generalInquiries": "Demandes générales:",
+    "crisisSupport": "Support de crise:",
+    "consultationBooking": "Réservation de consultation:",
+    "immediate": "Immédiat",
+    "sameDay": "Le jour même",
+    "whatHappensNext": "Que se passe-t-il ensuite?",
+    "step1": "Nous examinerons votre soumission et vous contacterons dans les 24 heures",
+    "step2": "Planifiez une consultation gratuite de 30 minutes pour évaluer vos besoins",
+    "step3": "Recevez une proposition personnalisée de gestion de crise",
+    "step4": "Commencez à mettre en œuvre votre plan de protection immédiatement",
+    "required": "*"
+  },
+  "managedService": {
+    "title": "Service de réponse aux crises géré",
+    "description": "Soutien expert en gestion de crise quand vous en avez le plus besoin. Notre service géré offre des capacités de réponse aux crises 24/7 adaptées aux petites entreprises.",
+    "learnMore": "En savoir plus sur ce service",
+    "comingSoonTitle": "Détails complets du service à venir",
+    "comingSoonDescription": "Nous finalisons les détails de notre offre de service géré. Cette page comprendra bientôt des informations détaillées sur nos protocoles de réponse aux crises, niveaux de service, tarification et études de cas.",
+    "contactPrompt": "En attendant, contactez-nous pour discuter de vos besoins spécifiques en gestion de crise.",
+    "contactTeam": "Contacter notre équipe"
+  },
+  "incidentMonitoring": {
+    "title": "Surveillance des incidents et alerte précoce",
+    "description": "Systèmes de surveillance proactifs pour détecter les crises potentielles avant qu'elles n'affectent vos opérations commerciales.",
+    "learnMore": "En savoir plus sur notre surveillance",
+    "comingSoonTitle": "Détails du service de surveillance à venir",
+    "comingSoonDescription": "Nous développons des capacités de surveillance avancées qui aideront les petites entreprises à détecter et à se préparer aux crises potentielles avant qu'elles ne surviennent. Cette page détaillera bientôt nos systèmes de surveillance, protocoles d'alerte et options d'intégration.",
+    "contactPrompt": "Contactez-nous pour discuter de vos besoins de surveillance et en savoir plus sur nos capacités d'alerte précoce actuelles.",
+    "discussOptions": "Discuter des options de surveillance"
+  },
+  "resources": {
+    "title": "Bibliothèque de ressources de gestion de crise",
+    "description": "Outils essentiels, modèles et guides pour la préparation aux crises et la planification de la réponse des petites entreprises.",
+    "requestAccess": "Demander l'accès aux ressources",
+    "quickLinks": "Liens rapides",
+    "householdHazards": "Risques domestiques et environnementaux",
+    "cyberSecurity": "Cybersécurité et rançongiciels (PME)",
+    "financialResilience": "Résilience financière / chaîne d'approvisionnement",
+    "householdTitle": "Risques domestiques et environnementaux (Canada)",
+    "cyberTitle": "Cybersécurité et rançongiciels (focus PME)",
+    "financialTitle": "Résilience financière et risque de chaîne d'approvisionnement",
+    "wantDownloads": "Vous voulez ces ressources en téléchargement?",
+    "lastUpdated": "Dernière mise à jour: 12 septembre 2025",
+    "requestCustom": "Demander des ressources personnalisées"
+  },
+  "legal": {
+    "title": "Informations juridiques et confidentialité",
+    "description": "Avis juridiques importants, politiques de confidentialité et informations sur le consentement.",
+    "canadaTitle": "Canada - Avis juridiques",
+    "canadaDescription": "Pour les clients et opérations canadiens:",
+    "usTitle": "États-Unis - Avis juridiques",
+    "usDescription": "Pour les clients et opérations aux États-Unis:",
+    "globalTitle": "Opérations mondiales - Avis généraux",
+    "globalDescription": "Pour les clients dans d'autres juridictions:",
+    "privacyTitle": "Politique de confidentialité et consentement",
+    "infoCollection": "Collecte d'informations",
+    "infoUse": "Utilisation des informations",
+    "dataSecurity": "Sécurité des données",
+    "consent": "Consentement",
+    "privacyContact": "Contact pour les questions de confidentialité",
+    "lastUpdated": "Dernière mise à jour:",
+    "updateNotice": "Nous pouvons mettre à jour ces conditions de temps en temps. Les clients seront informés des changements importants par courriel ou via notre plateforme de service."
+  },
+  "partners": {
+    "title": "Partenaires stratégiques et alliances",
+    "description": "Collaboration avec les leaders de l'industrie pour offrir des solutions complètes de gestion de crise aux petites entreprises.",
+    "explorePartnership": "Explorer les opportunités de partenariat",
+    "comingSoonTitle": "Informations sur les partenaires à venir",
+    "comingSoonDescription": "Nous construisons des partenariats stratégiques avec des fournisseurs de technologie, des services d'urgence, des consultants d'affaires et des spécialistes de l'industrie pour améliorer nos capacités de gestion de crise. Cette page présentera bientôt notre réseau de partenaires et les opportunités de collaboration.",
+    "contactPrompt": "Intéressé à devenir partenaire de Crisistance ou à en savoir plus sur nos partenariats actuels? Contactez-nous pour explorer les opportunités.",
+    "discussPartnerships": "Discuter des partenariats"
+  },
+  "getStarted": {
+    "title": "Obtenez votre plan gratuit",
+    "section1Title": "Section 1 — Informations de base sur l'entreprise",
+    "section2Title": "Section 2 — Emplacement physique et infrastructure",
+    "section3Title": "Section 3 — Opérations commerciales clés",
+    "section4Title": "Section 4 — Exposition aux risques",
+    "section5Title": "Section 5 — Personnel et continuité",
+    "section6Title": "Section 6 — Priorités finales",
+    "businessName": "Nom de l'entreprise",
+    "email": "Votre adresse courriel",
+    "location": "Ville, Province",
+    "employees": "Combien d'employés?",
+    "industry": "Industrie",
+    "next": "Suivant",
+    "back": "Retour",
+    "submit": "Soumettre mon évaluation",
+    "submitting": "Envoi en cours...",
+    "successTitle": "Soumission reçue!",
+    "successDescription": "Nous examinerons vos informations et enverrons votre plan personnalisé à votre courriel."
+  },
+  "common": {
+    "24hours": "24 heures"
+  }
+}

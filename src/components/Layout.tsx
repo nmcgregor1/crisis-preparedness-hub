@@ -1,41 +1,44 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Layout = () => {
   const location = useLocation();
   const { user } = useAuth();
+  const { t } = useTranslation();
   const isActive = (path: string) => location.pathname === path;
   
   const allNavigation = [{
-    name: 'Home',
+    name: t('nav.home'),
     href: '/'
   }, {
-    name: 'About',
+    name: t('nav.about'),
     href: '/about'
   }, {
-    name: 'Managed Service',
+    name: t('nav.managedService'),
     href: '/managed-service'
   }, {
-    name: 'Incident Monitoring',
+    name: t('nav.incidentMonitoring'),
     href: '/incident-monitoring'
   }, {
-    name: 'Resources',
+    name: t('nav.resources'),
     href: '/resource-library'
   }, {
-    name: 'News',
+    name: t('nav.news'),
     href: '/news'
   }, {
-    name: 'Admin',
+    name: t('nav.admin'),
     href: '/admin'
   }, {
-    name: 'Contact',
+    name: t('nav.contact'),
     href: '/contact'
   }];
   
   // Filter out Admin link if user is not authenticated
   const navigation = allNavigation.filter(item => 
-    item.name !== 'Admin' || user !== null
+    item.href !== '/admin' || user !== null
   );
   
   return <div className="min-h-screen flex flex-col">
@@ -50,20 +53,23 @@ const Layout = () => {
             </Link>
             
             <nav className="hidden md:flex space-x-8">
-              {navigation.map(item => <Link key={item.name} to={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.href) ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground'}`}>
+              {navigation.map(item => <Link key={item.href} to={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.href) ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground'}`}>
                   {item.name}
                 </Link>)}
             </nav>
             
-            <Button asChild variant="default">
-              <Link to="/get-started">Free Plan</Link>
-            </Button>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <Button asChild variant="default">
+                <Link to="/get-started">{t('nav.freePlan')}</Link>
+              </Button>
+            </div>
           </div>
           
           {/* Mobile navigation */}
           <div className="md:hidden pb-4">
             <nav className="flex justify-center space-x-4 flex-wrap">
-              {navigation.map(item => <Link key={item.name} to={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.href) ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground'}`}>
+              {navigation.map(item => <Link key={item.href} to={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.href) ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground'}`}>
                   {item.name}
                 </Link>)}
             </nav>
@@ -79,8 +85,8 @@ const Layout = () => {
         <div className="absolute inset-0 bg-primary/30"></div>
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-4xl font-bold mb-4 md:text-5xl">Be Prepared...Respond with Purpose</h1>
-            <p className="text-xl md:text-2xl">Crisis Management for Small Business</p>
+            <h1 className="text-4xl font-bold mb-4 md:text-5xl">{t('hero.title')}</h1>
+            <p className="text-xl md:text-2xl">{t('hero.subtitle')}</p>
           </div>
         </div>
       </section>
@@ -100,36 +106,36 @@ const Layout = () => {
                 <span className="text-lg font-bold text-primary">Crisistance</span>
               </Link>
               <p className="text-sm text-muted-foreground">
-                Crisis Management for Small Business
+                {t('footer.tagline')}
               </p>
             </div>
             
             <div>
-              <h3 className="font-semibold text-primary mb-4">Services</h3>
+              <h3 className="font-semibold text-primary mb-4">{t('footer.services')}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/managed-service" className="hover:text-primary">Managed Service</Link></li>
-                <li><Link to="/incident-monitoring" className="hover:text-primary">Incident Monitoring</Link></li>
+                <li><Link to="/managed-service" className="hover:text-primary">{t('nav.managedService')}</Link></li>
+                <li><Link to="/incident-monitoring" className="hover:text-primary">{t('nav.incidentMonitoring')}</Link></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="font-semibold text-primary mb-4">Company</h3>
+              <h3 className="font-semibold text-primary mb-4">{t('footer.company')}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/about" className="hover:text-primary">About</Link></li>
-                <li><Link to="/contact" className="hover:text-primary">Contact</Link></li>
+                <li><Link to="/about" className="hover:text-primary">{t('nav.about')}</Link></li>
+                <li><Link to="/contact" className="hover:text-primary">{t('nav.contact')}</Link></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="font-semibold text-primary mb-4">Legal</h3>
+              <h3 className="font-semibold text-primary mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/legal" className="hover:text-primary">Legal & Privacy</Link></li>
+                <li><Link to="/legal" className="hover:text-primary">{t('footer.legalPrivacy')}</Link></li>
               </ul>
             </div>
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Crisistance. All rights reserved.</p>
+            <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
           </div>
         </div>
       </footer>
