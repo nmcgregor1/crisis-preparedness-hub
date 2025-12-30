@@ -205,10 +205,13 @@ const ResourceLibrary = () => {
           <h2 className="text-3xl font-bold text-primary mb-8">{t('resources.generalTitle')}</h2>
           <div className="space-y-8">
             <div className="border border-border rounded-lg p-6 bg-card">
-              <h3 className="text-xl font-semibold text-primary mb-3">Additional resources coming soon</h3>
+              <h3 className="text-xl font-semibold text-primary mb-3">Introduction to Risk Management</h3>
               <p className="text-muted-foreground mb-4">
-                This section will contain general crisis management resources that don't fit into the specific categories above.
+                Every decision or investment comes with some level of risk, whether that's financial, reputational, operational, or any other kind of risk. What's key though is managing that risk — hence, risk management. Watch to learn the basics of risk management and why it's important for business.
               </p>
+              <a href="https://youtu.be/EMaZFlwLVQI?si=a8VpRym2o5Jq3yHB" target="_blank" rel="noopener" className="text-primary hover:text-primary/80 underline">
+                Watch: Risk Management Basics (YouTube)
+              </a>
             </div>
           </div>
         </div>
