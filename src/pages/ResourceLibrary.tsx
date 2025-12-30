@@ -30,6 +30,7 @@ const ResourceLibrary = () => {
             <li><a href="#household" className="text-primary hover:text-primary/80 underline">{t('resources.householdHazards')}</a></li>
             <li><a href="#cyber" className="text-primary hover:text-primary/80 underline">{t('resources.cyberSecurity')}</a></li>
             <li><a href="#financial" className="text-primary hover:text-primary/80 underline">{t('resources.financialResilience')}</a></li>
+            <li><a href="#general" className="text-primary hover:text-primary/80 underline">{t('resources.general')}</a></li>
           </ul>
         </div>
       </nav>
@@ -192,6 +193,21 @@ const ResourceLibrary = () => {
               </p>
               <p className="text-muted-foreground text-sm">
                 BDC cashflow templates and stress-test guidance for SMEs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* General Resources */}
+      <section id="general" className="py-16 bg-muted/30">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-primary mb-8">{t('resources.generalTitle')}</h2>
+          <div className="space-y-8">
+            <div className="border border-border rounded-lg p-6 bg-card">
+              <h3 className="text-xl font-semibold text-primary mb-3">Additional resources coming soon</h3>
+              <p className="text-muted-foreground mb-4">
+                This section will contain general crisis management resources that don't fit into the specific categories above.
               </p>
             </div>
           </div>
