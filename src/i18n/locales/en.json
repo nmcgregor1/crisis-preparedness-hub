@@ -71,7 +71,9 @@
     },
     "ctaTitle": "Ready to Protect Your Business?",
     "ctaDescription": "Don't wait for crisis to strike. Get prepared today with Crisistance.",
-    "ctaButton": "Contact us to get started"
+    "ctaButton": "Contact us to get started",
+    "mainHeading": "Crisis Management for Small Business",
+    "servicesHeading": "Our Services"
   },
   "about": {
     "title": "About Crisistance",
@@ -145,7 +147,7 @@
   "managedService": {
     "title": "Managed Crisis Response Service",
     "description": "Expert-led crisis management support when you need it most. Our managed service provides 24/7 crisis response capabilities tailored for small businesses.",
-    "learnMore": "Learn More About This Service",
+    "learnMore": "Learn about our managed response",
     "comingSoonTitle": "Comprehensive Service Details Coming Soon",
     "comingSoonDescription": "We're finalizing the details of our managed service offering. This page will soon include detailed information about our crisis response protocols, service levels, pricing, and case studies.",
     "contactPrompt": "In the meantime, contact us to discuss your specific crisis management needs.",
@@ -154,7 +156,7 @@
   "incidentMonitoring": {
     "title": "Incident Monitoring & Early Warning",
     "description": "Proactive monitoring systems to detect potential crises before they impact your business operations.",
-    "learnMore": "Learn About Our Monitoring",
+    "learnMore": "Explore monitoring options",
     "comingSoonTitle": "Monitoring Service Details Coming Soon",
     "comingSoonDescription": "We're developing advanced monitoring capabilities that will help small businesses detect and prepare for potential crises before they occur. This page will soon detail our monitoring systems, alert protocols, and integration options.",
     "contactPrompt": "Contact us to discuss your monitoring needs and learn about our current early warning capabilities.",

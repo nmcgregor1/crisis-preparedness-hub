@@ -71,7 +71,9 @@
     },
     "ctaTitle": "Prêt à protéger votre entreprise?",
     "ctaDescription": "N'attendez pas qu'une crise survienne. Préparez-vous dès aujourd'hui avec Crisistance.",
-    "ctaButton": "Contactez-nous pour commencer"
+    "ctaButton": "Contactez-nous pour commencer",
+    "mainHeading": "Gestion de crise pour les petites entreprises",
+    "servicesHeading": "Nos services"
   },
   "about": {
     "title": "À propos de Crisistance",
@@ -145,7 +147,7 @@
   "managedService": {
     "title": "Service de réponse aux crises géré",
     "description": "Soutien expert en gestion de crise quand vous en avez le plus besoin. Notre service géré offre des capacités de réponse aux crises 24/7 adaptées aux petites entreprises.",
-    "learnMore": "En savoir plus sur ce service",
+    "learnMore": "Découvrez notre intervention gérée",
     "comingSoonTitle": "Détails complets du service à venir",
     "comingSoonDescription": "Nous finalisons les détails de notre offre de service géré. Cette page comprendra bientôt des informations détaillées sur nos protocoles de réponse aux crises, niveaux de service, tarification et études de cas.",
     "contactPrompt": "En attendant, contactez-nous pour discuter de vos besoins spécifiques en gestion de crise.",
@@ -154,7 +156,7 @@
   "incidentMonitoring": {
     "title": "Surveillance des incidents et alerte précoce",
     "description": "Systèmes de surveillance proactifs pour détecter les crises potentielles avant qu'elles n'affectent vos opérations commerciales.",
-    "learnMore": "En savoir plus sur notre surveillance",
+    "learnMore": "Explorez les options de surveillance",
     "comingSoonTitle": "Détails du service de surveillance à venir",
     "comingSoonDescription": "Nous développons des capacités de surveillance avancées qui aideront les petites entreprises à détecter et à se préparer aux crises potentielles avant qu'elles ne surviennent. Cette page détaillera bientôt nos systèmes de surveillance, protocoles d'alerte et options d'intégration.",
     "contactPrompt": "Contactez-nous pour discuter de vos besoins de surveillance et en savoir plus sur nos capacités d'alerte précoce actuelles.",
