@@ -1,73 +1,167 @@
-# Welcome to your Lovable project
+# Crisistance
 
-## Project info
+Crisis management solutions tailored for small businesses.
 
-**URL**: https://lovable.dev/projects/0859d2ff-543e-4abf-bf14-749723cbc866
+**Live site:** [https://crisistance.com](https://crisistance.com)  
+**Preview:** [https://crisis-preparedness-hub.lovable.app](https://crisis-preparedness-hub.lovable.app)
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+Crisistance helps small businesses prepare for, respond to, and recover from crises. The site includes service information, a resource library, multilingual support, and a guided "Get Started" intake flow.
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0859d2ff-543e-4abf-bf14-749723cbc866) and start prompting.
+- **Framework:** [Vite](https://vitejs.dev/) + [React 18](https://react.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Components:** [shadcn/ui](https://ui.shadcn.com/)
+- **Backend / Auth:** [Lovable Cloud](https://docs.lovable.dev/features/cloud) (Supabase)
+- **Internationalization:** [react-i18next](https://react.i18next.com/)
+- **Analytics:** Google Analytics 4
+- **Package Manager:** `bun` (or `npm`)
 
-Changes made via Lovable will be committed automatically to this repo.
+## Prerequisites
 
-**Use your preferred IDE**
+- [Node.js](https://nodejs.org/) 18+ (LTS recommended)
+- [Bun](https://bun.sh/) (preferred) or `npm`
+- A Lovable Cloud / Supabase project (for backend features)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### 1. Clone the repository
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 2. Install dependencies
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+With Bun:
 
-**Use GitHub Codespaces**
+```sh
+bun install
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+With npm:
 
-## What technologies are used for this project?
+```sh
+npm install
+```
 
-This project is built with:
+### 3. Configure environment variables
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Create a `.env` file in the project root:
 
-## How can I deploy this project?
+```sh
+cp .env.example .env
+```
 
-Simply open [Lovable](https://lovable.dev/projects/0859d2ff-543e-4abf-bf14-749723cbc866) and click on Share -> Publish.
+Then fill in the values from your Lovable Cloud / Supabase project settings:
 
-## Can I connect a custom domain to my Lovable project?
+```env
+VITE_SUPABASE_URL=https://<your-project-ref>.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=<your-anon-public-key>
+VITE_SUPABASE_PROJECT_ID=<your-project-ref>
+```
 
-Yes, you can!
+> **Note:** `VITE_SUPABASE_PUBLISHABLE_KEY` is a public (anon) key and is safe to expose in the frontend bundle. Row Level Security (RLS) protects your data. Never commit secrets such as service-role keys or SMTP passwords.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### 4. Start the development server
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```sh
+bun run dev
+```
+
+The app will be available at [http://localhost:8080](http://localhost:8080).
+
+## Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `bun run dev` | Start the Vite dev server on port 8080 |
+| `bun run build` | Create an optimized production build |
+| `bun run build:dev` | Create a development build |
+| `bun run preview` | Preview the production build locally |
+| `bun run lint` | Run ESLint across the project |
+
+The `dev` and `build` scripts automatically regenerate `public/sitemap.xml` via `scripts/generate-sitemap.ts`.
+
+## Building for Production
+
+### Local production preview
+
+```sh
+bun run build
+bun run preview
+```
+
+`preview` serves the contents of `dist/` on a local Vite server.
+
+### Deploying via Lovable
+
+The recommended way to deploy this project is through Lovable:
+
+1. Open the project in [Lovable](https://lovable.dev/projects/0859d2ff-543e-4abf-bf14-749723cbc866).
+2. Click **Share → Publish**.
+3. Lovable will build and deploy the site automatically.
+
+You can also connect a custom domain under **Project Settings → Domains**.
+
+## Project Structure
+
+```text
+.
+├── public/              # Static assets (favicon, sitemap, robots.txt)
+├── scripts/             # Build helpers (sitemap generator)
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── contexts/        # React context providers
+│   ├── hooks/           # Custom React hooks
+│   ├── i18n/            # Translation files (EN / FR-CA)
+│   ├── integrations/    # Third-party integrations (Supabase client)
+│   ├── lib/             # Utility functions
+│   ├── pages/           # Route-level page components
+│   ├── App.tsx          # Main application router
+│   └── main.tsx         # Application entry point
+├── supabase/
+│   ├── functions/       # Edge functions (email, surveys, etc.)
+│   ├── migrations/      # Database schema migrations
+│   └── config.toml      # Supabase CLI configuration
+├── index.html           # HTML entry point + meta tags
+├── package.json         # Dependencies and scripts
+├── tailwind.config.ts   # Tailwind theme configuration
+└── vite.config.ts       # Vite configuration
+```
+
+## Environment Variables Reference
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_SUPABASE_URL` | Yes | Your Supabase project URL |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Yes | Your Supabase public (anon) API key |
+| `VITE_SUPABASE_PROJECT_ID` | Yes | Your Supabase project reference ID |
+
+Server-side secrets (for Supabase Edge Functions) are managed through Lovable Cloud and are not stored in this repository.
+
+## Features
+
+- **Multilingual support:** English and Canadian French via JSON locale files.
+- **Resource library:** Curated crisis-management resources by category.
+- **Get Started flow:** Multi-step survey for prospective clients.
+- **Email notifications:** Admin alerts sent via Supabase Edge Function.
+- **SEO:** Sitemap generation, semantic headings, meta tags, and robots.txt.
+- **Analytics:** Google Analytics 4 page-view tracking.
+
+## Contributing
+
+1. Create a feature branch.
+2. Make your changes.
+3. Run `bun run lint` to check for issues.
+4. Open a pull request.
+
+If you are editing through Lovable, changes are automatically committed and synced back to this repository.
+
+## License
+
+Copyright © Crisistance. All rights reserved.
