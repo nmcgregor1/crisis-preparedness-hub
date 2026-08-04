@@ -16,6 +16,7 @@ import News from "./pages/News";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import GetStarted from "./pages/GetStarted";
+import OAuthConsent from "./pages/OAuthConsent";
 import { AuthProvider } from "./contexts/AuthContext";
 import AdminRoute from "./components/AdminRoute";
 import { usePageTracking } from "./hooks/usePageTracking";
@@ -27,6 +28,7 @@ const AppContent = () => {
     <AuthProvider>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
