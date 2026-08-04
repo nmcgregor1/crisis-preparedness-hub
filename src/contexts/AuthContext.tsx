@@ -8,8 +8,8 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string, redirectTo?: string) => Promise<void>;
+  signUp: (email: string, password: string, redirectTo?: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -42,7 +42,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  const signIn = async (email: string, password: string) => {
+  const safePath = (path?: string) =>
+    path && path.startsWith('/') && !path.startsWith('//') ? path : '/admin';
+
+  const signIn = async (email: string, password: string, redirectTo?: string) => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -55,7 +58,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         title: "Success",
         description: "Signed in successfully",
       });
-      navigate('/admin');
+      const target = safePath(redirectTo);
+      if (target.startsWith('/.lovable/')) {
+        window.location.href = target;
+      } else {
+        navigate(target);
+      }
     } catch (error: any) {
       toast({
         title: "Error",
@@ -66,13 +74,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, redirectTo?: string) => {
     try {
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/admin`,
+          emailRedirectTo: `${window.location.origin}${safePath(redirectTo)}`,
         },
       });
 
@@ -82,7 +90,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         title: "Success",
         description: "Account created successfully",
       });
-      navigate('/admin');
+      const target = safePath(redirectTo);
+      if (target.startsWith('/.lovable/')) {
+        window.location.href = target;
+      } else {
+        navigate(target);
+      }
     } catch (error: any) {
       toast({
         title: "Error",

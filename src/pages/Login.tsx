@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,8 @@ const passwordSchema = z.string().min(6, "Password must be at least 6 characters
 
 const Login = () => {
   const { signIn, signUp } = useAuth();
+  const [searchParams] = useSearchParams();
+  const nextParam = searchParams.get("next") ?? undefined;
   const [signInData, setSignInData] = useState({ email: "", password: "" });
   const [signUpData, setSignUpData] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +73,7 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      await signIn(signInData.email, signInData.password);
+      await signIn(signInData.email, signInData.password, nextParam);
     } finally {
       setIsLoading(false);
     }
@@ -82,7 +85,7 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      await signUp(signUpData.email, signUpData.password);
+      await signUp(signUpData.email, signUpData.password, nextParam);
     } finally {
       setIsLoading(false);
     }

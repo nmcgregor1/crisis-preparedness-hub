@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://dtgldtmgrblnwvfaevwd.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "crisis-preparedness-hub",
+      "version": "0.1.0",
+      "title": "crisis-preparedness-hub"
+    },
+    "tools": [
+      {
+        "name": "list_news_articles",
+        "title": "List news articles",
+        "description": "List crisis-management news articles from Crisistance, newest first. Optionally filter by category or published state.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Filter by article category."
+            },
+            "published": {
+              "type": "boolean",
+              "description": "Filter by published state. Drafts are visible to admins only."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 10,
+              "description": "Maximum number of articles to return."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_news_article",
+        "title": "Get news article",
+        "description": "Fetch the full content of a single Crisistance news article by its id.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The article id."
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_news_article",
+        "title": "Create news article",
+        "description": "Create a Crisistance news article. Requires an admin account; articles are created as drafts unless published is true.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "headline": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Article headline."
+            },
+            "content": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Article body text."
+            },
+            "category": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Article category, e.g. 'Cybersecurity'."
+            },
+            "link": {
+              "type": "string",
+              "format": "uri",
+              "description": "Optional source URL."
+            },
+            "published": {
+              "type": "boolean",
+              "default": false,
+              "description": "Publish immediately instead of saving as a draft."
+            }
+          },
+          "required": [
+            "headline",
+            "content",
+            "category"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_contact_submissions",
+        "title": "List contact submissions",
+        "description": "List contact form submissions received by Crisistance, newest first. Requires an admin account.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Filter by submission status, e.g. 'new'."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 10,
+              "description": "Maximum number of submissions to return."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

@@ -8,3 +8,6 @@ verify_jwt = true
 
 [functions.submit-free-plan]
 verify_jwt = false
+
+[functions.mcp]
+verify_jwt = false
